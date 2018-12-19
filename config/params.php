@@ -2,9 +2,9 @@
 
 return [
     'adminEmail' => 'admin@example.com',
-    'baseURI' => 'http://www.phenome-fppn.fr/phis/',
-    'platform' => 'Phis',
-    'platformCode' => 'PHS',
+    'baseURI' => 'http://www.phenome-fppn.fr/mtpvm/',
+    'platform' => 'Montpellier',
+    'platformCode' => 'MTPVM',
     
     //ONTOLOGY -----------------------------------------------------------------
     //-------- Concepts

@@ -16,7 +16,6 @@ use app\models\yiiModels\YiiSensorModel;
 use app\models\yiiModels\DocumentSearch;
 use app\models\yiiModels\AnnotationSearch;
 use app\models\wsModels\WSConstants;
-use app\models\yiiModels\VariableSearch;
 
 /**
  * CRUD actions for SensorModel
@@ -330,9 +329,9 @@ class SensorController extends Controller {
     public function actionUpdateVariables() {
         $post = Yii::$app->request->post();
         $sessionToken = Yii::$app->session['access_token'];        
-        $sensorUri = $post["sensor"];
-        if (isset($post["variables"])) {
-            $variablesUri = $post["variables"];
+        $sensorUri = $post["uri"];
+        if (isset($post["items"])) {
+            $variablesUri = $post["items"];
         } else {
             $variablesUri = [];
         }
@@ -513,7 +512,6 @@ class SensorController extends Controller {
             
             // Get data
             $sessionToken = Yii::$app->session['access_token'];
-            $sensorGraphData = $searchModel->getEnvironmentData($sessionToken);
             
             // Render data
             return $this->renderAjax('_view_sensor_graph', [

@@ -16,13 +16,13 @@ $this->title = 'PHIS';
 //    at the beginning of the file. You can also see full-slider.css
 //    file to set different annimation style.
 //    \SILEX:info
-//        echo FullScreenImageSliderWidget::widget([
-//            FullScreenImageSliderWidget::IMAGES_URL_LINK => [
-//                "background/wallpaper_grapes_vine.jpg",
-//                "background/wallpaper_leaf.jpg",
-//                "background/wallpaper_tomato.jpg",
-//                "background/wallpaper_vine.jpg"
-//            ]
-//        ]);
+        echo FullScreenImageSliderWidget::widget([
+            FullScreenImageSliderWidget::IMAGES_URL_LINK => [
+                "background/wallpaper_grapes_vine.jpg",
+                "background/wallpaper_leaf.jpg",
+                "background/wallpaper_tomato.jpg",
+                "background/wallpaper_vine.jpg"
+            ]
+        ]);
     ?>
 </div>

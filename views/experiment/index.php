@@ -48,27 +48,36 @@ $this->params['breadcrumbs'][] = $this->title;
               'attribute' => 'startDate',
               'format' => 'raw',
                'value' => 'startDate',
-              'filter' => DatePicker::widget([
-                    'model' => $searchModel, 
-                    'attribute' => 'startDate',
-                    'pluginOptions' => [
-                        'autoclose'=>true,
-                        'format' => 'yyyy-mm-dd'
-                    ]
-                ]),
+                //SILEX:info
+                //Uncomment when the search will be fixed in the web service
+//              'filter' => DatePicker::widget([
+//                    'model' => $searchModel, 
+//                    'attribute' => 'startDate',
+//                    'pluginOptions' => [
+//                        'autoclose'=>true,
+//                        'format' => 'yyyy-mm-dd'
+//                    ]
+//                ]),
+                //\SILEX:info
+                'filter' =>false,
             ],
+                
             [
               'attribute' => 'endDate',
               'format' => 'raw',
                'value' => 'endDate',
-              'filter' => DatePicker::widget([
-                    'model' => $searchModel, 
-                    'attribute' => 'endDate',
-                    'pluginOptions' => [
-                        'autoclose'=>true,
-                        'format' => 'yyyy-mm-dd'
-                    ]
-                ]),
+                //SILEX:info
+                //Uncomment when the search will be fixed in the web service
+//              'filter' => DatePicker::widget([
+//                    'model' => $searchModel, 
+//                    'attribute' => 'endDate',
+//                    'pluginOptions' => [
+//                        'autoclose'=>true,
+//                        'format' => 'yyyy-mm-dd'
+//                    ]
+//                ]),
+                //\SILEX:info
+                'filter' =>false,
             ],
 //            [
 //              'attribute' => 'projects',

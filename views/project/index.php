@@ -47,27 +47,35 @@ $this->params['breadcrumbs'][] = $this->title;
               'attribute' => 'dateStart',
               'format' => 'raw',
                'value' => 'dateStart',
-              'filter' => DatePicker::widget([
-                    'model' => $searchModel, 
-                    'attribute' => 'dateStart',
-                    'pluginOptions' => [
-                        'autoclose'=>true,
-                        'format' => 'yyyy-mm-dd'
-                    ]
-                ]),
+                //SILEX:info
+                //Uncomment when the search will be fixed in the web service
+//              'filter' => DatePicker::widget([
+//                    'model' => $searchModel, 
+//                    'attribute' => 'dateStart',
+//                    'pluginOptions' => [
+//                        'autoclose'=>true,
+//                        'format' => 'yyyy-mm-dd'
+//                    ]
+//                ]),
+                //\SILEX:info
+                'filter' =>false,
             ],
             [
               'attribute' => 'dateEnd',
               'format' => 'raw',
                'value' => 'dateEnd',
-              'filter' => DatePicker::widget([
-                    'model' => $searchModel, 
-                    'attribute' => 'dateEnd',
-                    'pluginOptions' => [
-                        'autoclose'=>true,
-                        'format' => 'yyyy-mm-dd'
-                    ]
-                ]),
+                //SILEX:info
+                //Uncomment when the search will be fixed in the web service
+//              'filter' => DatePicker::widget([
+//                    'model' => $searchModel, 
+//                    'attribute' => 'dateEnd',
+//                    'pluginOptions' => [
+//                        'autoclose'=>true,
+//                        'format' => 'yyyy-mm-dd'
+//                    ]
+//                ]),
+                //\SILEX:info
+                'filter' =>false,
             ],
             // 'subprojectType',
             // 'financialName',

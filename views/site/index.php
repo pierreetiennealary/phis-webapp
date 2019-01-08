@@ -1,6 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 $this->title = 'PHIS';
+use app\components\widgets\FullScreenImageSliderWidget;
 ?>
 <div class="site-index">
     <div class="jumbotron">

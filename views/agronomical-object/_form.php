@@ -37,7 +37,7 @@
         $('#objects-created').hide();
         
         // Empty validator
-        emptyValidator = function(value, callback) {
+        var emptyValidator = function(value, callback) {
           if (isEmpty(value)) {
             callback(false);
           } else {
@@ -65,7 +65,7 @@
          * @param {type} callback
          * @returns {undefined} 
          */
-        objectTypeValidator = function(value, callback) {
+        var objectTypeValidator = function(value, callback) {
             if (isEmpty(value)) {
                 callback(false);
             } else if (objectsTypes.indexOf(value) > -1) {
@@ -75,7 +75,7 @@
             }
         };
         
-        speciesValidator = function(value, callback) {
+        var speciesValidator = function(value, callback) {
           if (isEmpty(value)) {
                 callback(true);
             } else if (species.indexOf(value) > -1) {
@@ -84,13 +84,15 @@
                 callback(false);
             }  
         };
-           
+        
+        //creates renderer to color in red required column names
         function firstRowRequiedRenderer(instance, td, row, col, prop, value, cellProperties) {
             Handsontable.renderers.TextRenderer.apply(this, arguments);
             td.style.color = 'red';
             td.style.fontWeight = 'bold';
         }   
         
+        //creates renderer for the uriColumn
         function uriColumnRenderer(instance, td, row, col, prop, value, cellProperties) {
             Handsontable.renderers.TextRenderer.apply(this, arguments);
             td.style.fontWeight = 'bold';
@@ -152,6 +154,12 @@
                     data: 'variety',
                     type: 'text',
                     required: false
+                },
+                {
+                    data: 'insertion status',
+                    type: 'text',
+                    required: false,
+                    readOnly: true
                 }
 
             ],
@@ -164,7 +172,8 @@
                 "<b><?= Yii::t('app', 'Geometry') ?></b>",
                 "<b><?= Yii::t('app', 'Parent') ?></b>",
                 "<b><?= Yii::t('app', 'Species') ?></b>",
-                "<b><?= Yii::t('app', 'Variety') ?></b>"
+                "<b><?= Yii::t('app', 'Variety') ?></b>",
+                "<b><?= Yii::t('app', 'Insertion status') ?></b>"
             ],
             manualRowMove: true,
             manualColumnMove: true,
@@ -198,8 +207,8 @@
                 document.getElementById("loader").style.display = "block";
                 document.getElementById("objects-creation").style.display = "none";
                 
-                objectsArray = handsontable.getData();
-                objectsString = JSON.stringify(objectsArray);
+                var objectsArray = handsontable.getData();
+                var objectsString = JSON.stringify(objectsArray);
                 $.ajax({
                     url: 'index.php?r=agronomical-object%2Fcreate-multiple-scientific-objects',
                     type: 'POST',
@@ -208,15 +217,16 @@
                 }).done(function (data) {
                     document.getElementById("objects-creation").style.display = "block";
                     document.getElementById("loader").style.display = "none";
-                    for (var i = 0; i < data.length; i++) {
-                       handsontable.setDataAtCell(i, 0, data[i]);
-                    }
-                    
+                    for (var i = 0; i < data["messages"].length; i++) {
+                        if (data["objectUris"][i] !== null) {
+                            handsontable.setDataAtCell(i, 0, data["objectUris"][i]);
+                        }
+                        handsontable.setDataAtCell(i, 8, data["messages"][i]);                        
+                    }                    
                     $('#objects-save').hide();
-                    $('#objects-created').show();
                 })
                 .fail(function (jqXHR, textStatus) {
-                    console.log(jqXHR.responseText);
+                    toastr["error"]("The object creation has failed");
                     document.getElementById("objects-creation").style.display = "block";
                     document.getElementById("loader").style.display = "none";
                 });

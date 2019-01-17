@@ -2,9 +2,9 @@
 
 return [
     'adminEmail' => 'admin@example.com',
-    'baseURI' => 'http://www.phenome-fppn.fr/phis/',
-    'platform' => 'Phis',
-    'platformCode' => 'PHS',
+    'baseURI' => 'http://www.opensilex.org/demo/',
+    'platform' => 'Opensilex',
+    'platformCode' => 'OSL',
     'standardDateTimeFormat' => 'Y-m-dTH:i:sZ',
     'standardDateTimeFormatPhp' => 'Y-m-d H:i:sP',
     'dateRangeSeparator' => ' - ',
@@ -63,7 +63,7 @@ return [
     'hasLens' => 'http://www.opensilex.org/vocabulary/oeso#hasLens',
     'hasPart' => 'http://www.opensilex.org/vocabulary/oeso#hasPart',
     'hasRadiometricTargetMaterial' => 'http://www.opensilex.org/vocabulary/oeso#hasRadiometricTargetMaterial',
-    'hasRepetition' => 'http://www.opensilex.org/vocabulary/oeso#hasRepetition',
+    'hasReplication' => 'http://www.opensilex.org/vocabulary/oeso#hasReplication',
     'hasShape' => 'http://www.opensilex.org/vocabulary/oeso#hasShape',
     'hasShapeLength' => 'http://www.opensilex.org/vocabulary/oeso#hasShapeLength',
     'hasShapeWidth' => 'http://www.opensilex.org/vocabulary/oeso#hasShapeWidth',

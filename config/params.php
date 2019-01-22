@@ -5,6 +5,10 @@ return [
     'baseURI' => 'http://www.phenome-fppn.fr/mtpvm/',
     'platform' => 'Montpellier',
     'platformCode' => 'MTPVM',
+    'standardDateTimeFormat' => 'Y-m-dTH:i:sZ',
+    'standardDateTimeFormatPhp' => 'Y-m-d H:i:sP',
+    'dateRangeSeparator' => ' - ',
+    'numberOfConcernedItemsToDisplayInEventIndex' => 3,
     
     //ONTOLOGY -----------------------------------------------------------------
     //-------- Concepts

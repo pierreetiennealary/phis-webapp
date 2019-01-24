@@ -9,6 +9,10 @@ return [
     'standardDateTimeFormatPhp' => 'Y-m-d H:i:sP',
     'dateRangeSeparator' => ' - ',
     'numberOfConcernedItemsToDisplayInEventIndex' => 3,
+    'platformCode' => 'PHS',
+    'isDemo' => false,
+    'demoLogin' => 'guest@opensilex.org',
+    'demoPassword' => 'guest',
     
     //ONTOLOGY -----------------------------------------------------------------
     //-------- Concepts

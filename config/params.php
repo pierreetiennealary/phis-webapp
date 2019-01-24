@@ -5,6 +5,9 @@ return [
     'baseURI' => 'http://www.phenome-fppn.fr/phis/',
     'platform' => 'Phis',
     'platformCode' => 'PHS',
+    'isDemo' => false,
+    'demoLogin' => 'guest@opensilex.org',
+    'demoPassword' => 'guest',
     
     //ONTOLOGY -----------------------------------------------------------------
     //-------- Concepts

@@ -59,7 +59,7 @@ foreach ($model->properties as $property) {
         <?php
             if (Yii::$app->session['isAdmin']) {
                 $options = ['class' => 'btn btn-success'];
-                if ($sensorProfilePropertiesCount == 0) {
+                if ($sensorProfilePropertiesCount > 0) {
                     $options["disabled"] = "disabled";
                     echo Html::a(Yii::t('app', 'Characterize Sensor'), null, $options);
                 } else {

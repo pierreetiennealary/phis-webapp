@@ -61,8 +61,10 @@ foreach ($model->properties as $property) {
                 $options = ['class' => 'btn btn-success'];
                 if ($sensorProfilePropertiesCount == 0) {
                     $options["disabled"] = "disabled";
+                    echo Html::a(Yii::t('app', 'Characterize Sensor'), null, $options);
+                } else {
+                    echo Html::a(Yii::t('app', 'Characterize Sensor'), ['characterize', 'sensorUri' => $model->uri], $options);
                 }
-                echo Html::a(Yii::t('app', 'Characterize Sensor'), ['characterize', 'sensorUri' => $model->uri], $options);
             }
         ?>
     </p>

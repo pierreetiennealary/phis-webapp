@@ -14,4 +14,3 @@
 
 define('WS_PHIS_PATH', 'http://138.102.159.37:8080/phenomeMtpVMAPI/rest/');
 define('WS_PHIS_PATH_DOC', 'http://138.102.159.37:8080/phenomeMtpVMAPI/');
-

@@ -12,6 +12,7 @@ return [
     'isDemo' => false,
     'demoLogin' => 'guest@opensilex.org',
     'demoPassword' => 'guest',
+    'opensilex-webapp-type' => 'opensilex', //'opensilex' or 'phis' (used to adapt the view)
     
     //ONTOLOGY -----------------------------------------------------------------
     //-------- Concepts

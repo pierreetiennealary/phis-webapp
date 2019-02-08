@@ -247,7 +247,7 @@ class YiiUserModel extends WSActiveRecord {
             }
             
             //2. if there are other pages, get the other users
-            if ($this->totalPages > $this->page) {
+            if ($this->totalPages >= $this->page) {
                 $this->page++; //next page
                 $nextUsers = $this->getPersonsMailsAndName($sessionToken);
                 

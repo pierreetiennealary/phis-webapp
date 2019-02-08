@@ -313,7 +313,7 @@ use yii\helpers\Url;
     </div>
 
     <p><i>
-        <?= Html::a("<span class=\"glyphicon glyphicon-download-alt\" aria-hidden=\"true\"></span> " . Yii::t('app', 'Download Template'), \config::path()['basePath'] . '/documents/DatasetFiles/datasetTemplate.csv', ['id' => 'downloadDatasetTemplate']) ?>
+        <?= Html::a("<span class=\"glyphicon glyphicon-download-alt\" aria-hidden=\"true\"></span> " . Yii::t('app', 'Download Template'), \config::path()['basePath'] . 'documents/DatasetFiles/datasetTemplate.csv', ['id' => 'downloadDatasetTemplate']) ?>
     </i></p>
     <?= $form->field($model, 'file')->widget(FileInput::classname(), [
         'options' => [

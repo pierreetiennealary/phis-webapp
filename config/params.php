@@ -2,7 +2,7 @@
 
 return [
     'adminEmail' => 'admin@example.com',
-    'baseURI' => 'http://www.phenome-fppn.fr/mtpvm/',
+    'baseURI' => 'http://www.opensilex.org/test',
     'platform' => 'Test',
     'platformCode' => 'TEST',
     'standardDateTimeFormat' => 'Y-m-dTH:i:sZ',

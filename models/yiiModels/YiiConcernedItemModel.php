@@ -15,24 +15,34 @@ use app\models\wsModels\WSActiveRecord;
 
 /**
  * Model for the concerned items
+ * @update [Andréas Garcia] 15 Feb., 2019: add labels
  * @author Morgane Vidal <morgane.vidal@inra.fr>
  */
 class YiiConcernedItemModel extends WSActiveRecord {
     
     /**
      * uri of the item 
-     *  (e.g http://www.phenome-fppn.fr/platform/2017/o1032588)
+     * @example http://www.phenome-fppn.fr/platform/2017/o1032588
      * @var string 
      */
     public $uri;
     const URI = "uri";
+    
     /**
      * uri of the rdf type of the item 
-     *  (e.g http://www.opensilex.org/vocabulary/oeso#Plot)
+     * @example http://www.opensilex.org/vocabulary/oeso#Plot
      * @var string
      */
     public $rdfType;
     const RDF_TYPE = "rdfType";
+    
+    /**
+     * labels 
+     * @example [Plot Lavalette, Parcelle Lavalette]
+     * @var array
+     */
+    public $labels;
+    const LABELS = "labels";
     
     /**
      * 
@@ -40,7 +50,7 @@ class YiiConcernedItemModel extends WSActiveRecord {
      */
     public function rules() {
         return [
-            [['rdfType', 'uri'], 'safe']
+            [[self::RDF_TYPE, self::URI, self::LABELS], 'safe']
         ];
     }
     
@@ -50,8 +60,9 @@ class YiiConcernedItemModel extends WSActiveRecord {
      */
     public function attributeLabels() {
         return [
-            'uri' => 'URI',
-            'rdfType' => Yii::t('app', 'Type')
+            self::URI => 'URI',
+            self::RDF_TYPE => Yii::t('app', 'Type'),
+            self::LABELS => Yii::t('app', 'Labels')
         ];
     }
     
@@ -60,8 +71,9 @@ class YiiConcernedItemModel extends WSActiveRecord {
      * @param array $array array key => value which contains the concerned item
      */
     protected function arrayToAttributes($array) {
-        $this->uri = $array[YiiConcernedItemModel::URI];
-        $this->rdfType = $array[YiiConcernedItemModel::RDF_TYPE];
+        $this->uri = $array[self::URI];
+        $this->rdfType = $array[self::RDF_TYPE];
+        $this->labels = $array[self::LABELS];
     }
 
     /**
@@ -71,8 +83,9 @@ class YiiConcernedItemModel extends WSActiveRecord {
      */
     public function attributesToArray() {
         $attributesArray = parent::attributesToArray();
-        $attributesArray[YiiConcernedItemModel::URI] = $this->uri;
-        $attributesArray[YiiConcernedItemModel::RDF_TYPE] = $this->rdfType;
+        $attributesArray[self::URI] = $this->uri;
+        $attributesArray[self::RDF_TYPE] = $this->rdfType;
+        $attributesArray[self::LABELS] = $this->labels;
         
         return $attributesArray;
     }

@@ -1,10 +1,7 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
-    'baseURI' => 'http://www.opensilex.org/test',
     'platform' => 'Test',
-    'platformCode' => 'TEST',
     'standardDateTimeFormat' => 'Y-m-dTH:i:sZ',
     'standardDateTimeFormatPhp' => 'Y-m-d H:i:sP',
     'dateRangeSeparator' => ' - ',

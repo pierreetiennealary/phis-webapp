@@ -62,10 +62,10 @@ class EventSearch extends YiiEventModel {
         return [[
             [
                 YiiEventModel::TYPE,
-                EventSearch::CONCERNED_ITEM_LABEL,
-                EventSearch::DATE_RANGE,
-                EventSearch::DATE_RANGE_START,
-                EventSearch::DATE_RANGE_END
+                self::CONCERNED_ITEM_LABEL,
+                self::DATE_RANGE,
+                self::DATE_RANGE_START,
+                self::DATE_RANGE_END
             ],  'safe']]; 
     }
     
@@ -74,11 +74,11 @@ class EventSearch extends YiiEventModel {
      */
     public function attributeLabels() {
         return array_merge(
-                parent::attributeLabels(),
-                [
-                    EventSearch::CONCERNED_ITEM_LABEL => Yii::t('app', 'Concerned Items'),
-                    EventSearch::DATE_RANGE => Yii::t('app', 'Date')
-                ]
+            parent::attributeLabels(),
+            [
+                self::CONCERNED_ITEM_LABEL => Yii::t('app', 'Concerned Items'),
+                self::DATE_RANGE => Yii::t('app', 'Date')
+            ]
         );
     }
     
@@ -88,7 +88,7 @@ class EventSearch extends YiiEventModel {
      * @return mixed DataProvider of the result or string 
      * \app\models\wsModels\WSConstants::TOKEN if the user needs to log in
      */
-    public function search($sessionToken, $searchParams) {
+    public function searchEvents($sessionToken, $searchParams) {
         $this->load($searchParams);
         if (isset($searchParams[YiiModelsConstants::PAGE])) {
             $this->page = $searchParams[YiiModelsConstants::PAGE];
@@ -115,6 +115,7 @@ class EventSearch extends YiiEventModel {
             && $results->{'metadata'}->{'status'}[0]->{'exception'}->{'details'} === WSConstants::TOKEN) {
             return WSConstants::TOKEN;
         } else {
+            
             $resultSet = $this->jsonListOfArraysToArray($results);
             return new ArrayDataProvider([
                 'models' => $resultSet,

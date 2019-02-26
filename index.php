@@ -16,8 +16,8 @@
 
 <html>
     <head>
-        <title>PHIS</title>
-        <meta http-equiv="refresh" content="0;URL=http://138.102.159.37/opensilex-test/web">
+        <title>OpenSILEX</title>
+        <meta http-equiv="refresh" content="0;URL=http://138.102.159.37/test/web">
     </head>
     <body></body>
 </html>

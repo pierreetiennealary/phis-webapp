@@ -13,7 +13,7 @@ use yii\grid\GridView;
 use app\controllers\InfrastructureController;
 use app\components\widgets\AnnotationGridViewWidget;
 use app\components\widgets\AnnotationButtonWidget;
-use app\components\widgets\PropertiesWidget;
+use app\components\widgets\PropertyWidget;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\YiiInfrastructureModel */
@@ -31,17 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <!-- Add annotation button -->
-        <?= AnnotationButtonWidget::widget([AnnotationButtonWidget::TARGETS => [$model->uri]]); ?>
         <?php
         if (Yii::$app->session['isAdmin']) {
             echo Html::a(Yii::t('app', 'Add Document'), ['document/create', 'concernedItemUri' => $model->uri, 'concernedItemLabel' => $model->label, 'concernedItemRdfType' => Yii::$app->params["Installation"]], ['class' => $dataDocumentsProvider->getCount() > 0 ? 'btn btn-success' : 'btn btn-warning']);
+            echo AnnotationButtonWidget::widget([AnnotationButtonWidget::TARGETS => [$model->uri]]);
         }
         ?>
     </p>
     <!-- Infrastructure properties detail-->
     <?=
-    PropertiesWidget::widget([
+    PropertyWidget::widget([
         'uri' => $model->uri,
         'properties' => $model->properties,
         'aliasProperty' =>  Yii::$app->params["rdfsLabel"],

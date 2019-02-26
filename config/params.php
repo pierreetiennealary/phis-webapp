@@ -1,10 +1,7 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
-    'baseURI' => 'http://www.phenome-fppn.fr/mtpvm/',
-    'platform' => 'Montpellier',
-    'platformCode' => 'MTPVM',
+    'platform' => 'Test',
     'standardDateTimeFormat' => 'Y-m-dTH:i:sZ',
     'standardDateTimeFormatPhp' => 'Y-m-d H:i:sP',
     'dateRangeSeparator' => ' - ',

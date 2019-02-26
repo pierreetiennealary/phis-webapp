@@ -1,7 +1,7 @@
 <?php
 
 //******************************************************************************
-//                                       PropertiesWidget.php
+//                             PropertyWidget.php
 // SILEX-PHIS
 // Copyright © INRA 2018
 // Creation date: 20 September, 2018
@@ -21,27 +21,44 @@ use Yii;
  * 
  * @author Vincent Migot < vincent.migot@inra.fr>
  */
-class PropertiesWidget extends Widget {
+class PropertyWidget extends Widget {
 
+    CONST NO_PROPERTY = "No Specific Property";
+
+    // widget title
+    public $title;
+    
     // Uri of the main object (widget option)
     public $uri;
+    
     // Property type which match the alias value (widget option)
     public $aliasProperty;
+    
     // List of object properties (widget option)
     public $properties;
+    
+    // are properties required or not
+    public $arePopertiesRequired = false;
+    
     // Array of rdf type, if corresponding values found in $properties, 
     // it will display it first in the given order (widget option)
     public $relationOrder;
+    
     // Basic template rendering option (widget option)
     public $template = '<tr><th>{label}</th><td>{value}</td></tr>';
+    
     // Basic table options
     public $options = ['class' => 'table table-striped table-bordered properties-widget'];
+    
     // Alias of the main object determined from aliasProperty options
-    private $alias = "";
+    private $alias;
+    
     // Internal representation of fields array, corresponding to $relationOrder option
     private $fields = [];
+    
     // Internal representation of extrafields array, corresponding to properties not described in $relationOrder option
     private $extraFields = [];
+    
     // Mapping of formatters based on rdf type value
     protected $propertyFormatters = [
         "Infrastructure" => PropertyFormatter::INFRASTRUCTURE,
@@ -68,11 +85,6 @@ class PropertiesWidget extends Widget {
             }
         }
         $this->propertyFormatters = $formatters;
-
-        // must be not null
-        if ($this->uri === null) {
-            throw new \Exception("URI isn't set");
-        }
 
         if ($this->properties === null) {
             throw new \Exception("Properties aren't set");
@@ -220,22 +232,34 @@ class PropertiesWidget extends Widget {
      * Render widget
      */
     public function run() {
-        $rows = [];
-
-        $rows[] = $this->renderAttribute("uri", $this->uri);
-        $rows[] = $this->renderAttribute("alias", $this->alias);
-
-        foreach ($this->fields as $field) {
-            $rows[] = $this->renderAttribute($field["label"], $field["values"]);
+        if(count($this->properties) == 0) {
+            $htmlRendered = "<h3>" . Yii::t('app', self::NO_PROPERTY) . "</h3>";
         }
+        else {
+            $htmlRendered = "<h3>" . $this->title . "</h3>";
+            $rows = [];
 
-        foreach ($this->extraFields as $field) {
-            $rows[] = $this->renderAttribute($field["label"], $field["values"]);
+            if ($this->uri !== null) {
+                $rows[] = $this->renderAttribute("uri", $this->uri);
+            }
+            if ($this->alias !== null) {
+                $rows[] = $this->renderAttribute("alias", $this->alias);
+            }
+
+            foreach ($this->fields as $field) {
+                $rows[] = $this->renderAttribute($field["label"], $field["values"]);
+            }
+
+            foreach ($this->extraFields as $field) {
+                $rows[] = $this->renderAttribute($field["label"], $field["values"]);
+            }
+
+            $htmlRendered .= implode("\n", $rows);
         }
-
         $options = $this->options;
         $tag = ArrayHelper::remove($options, 'tag', 'table');
-        echo Html::tag($tag, implode("\n", $rows), $options);
+
+        echo Html::tag($tag, $htmlRendered, $options);
     }
 
     /**

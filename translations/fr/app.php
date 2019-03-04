@@ -100,6 +100,7 @@ return [
     'Height' => 'Hauteur',
     'Generate Layer' => 'Générer la Couche',
     'Generate Map' => 'Générer la Carte',
+	'Generated URI' => 'URI généré',
     'Geographic Location' => 'Localisation géographique',
     'Geometry' => 'Géométrie',
     'Groups' => 'Groupes',

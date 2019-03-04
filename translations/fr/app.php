@@ -98,6 +98,7 @@ return [
     'Financial Support' => 'Support financier',
     'Focal Length' => 'Distance Focale',
     'Height' => 'Hauteur',
+	'Insertion status' => 'Statut de l\'insertion',
     'Generate Layer' => 'Générer la Couche',
     'Generate Map' => 'Générer la Carte',
 	'Generated URI' => 'URI généré',

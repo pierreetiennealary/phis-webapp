@@ -46,6 +46,7 @@ return [
     'The error above occurred while the Web server was processing your request.' => 'L\'erreur ci-dessus est survenue lors du traitement de votre requête par le serveur web.',
     'The value' => 'La valeur',
     'The variety used in the plot (e.g. apache)' => 'La variété du plot (ex. apache)',
+	'to get more informations about the columns contents' => 'pour obtenir davantage d\'information sur le contenu de chaque colonne',
     'Unknown scientific object.' => 'Objet scientifique inconnu.',
     'Unknown experiment' => 'Expérimentation inconnue',
     'Unknown species' => 'Espèce inconnue',    

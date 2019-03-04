@@ -21,7 +21,7 @@
     <p><i>
 	<?= Yii::t('app', 'See') ?>
 	<a href="https://opensilex.github.io/phis-docs-community/experimental-organization/#importing-scientific-objects" target="_blank"><?= Yii::t('app', 'the documentation') ?></a>
-	<?= Yii::t('messages', 'to get more informations about the columns contents') ?>
+	<?= Yii::t('messages', 'to get more information about the columns content') ?>
 	.
 	</i></p>
     <div id="objects-created" class="alert alert-success"><?= Yii::t('app', 'Scientific Objects Created') ?></div>

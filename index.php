@@ -11,13 +11,15 @@
 // Last modification date:  March, 2017
 // Subject: index du site
 //***********************************************************************************************
+require_once('./config/config.php');
 
+$params = config::path();
 ?>
 
 <html>
     <head>
         <title>OpenSILEX</title>
-        <meta http-equiv="refresh" content="0;URL=http://138.102.159.37/test/web">
+        <meta http-equiv="refresh" content="0;URL=<?= $params['baseIndexURL'] ?>">
     </head>
     <body></body>
 </html>

@@ -172,7 +172,7 @@ return [
     'Subproject Of' => 'Sous-projet de',
     'Team' => 'Équipe',
     'Technical Supervisors' => 'Superviseurs techniques',
-	'the documentation' => 'la documentation',
+'the documentation' => 'la documentation',
     'Title' => 'Titre',
     'Tools' => 'Outils',
     'Trait' => 'Trait',

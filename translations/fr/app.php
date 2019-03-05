@@ -153,7 +153,7 @@ return [
     'Replication' => 'Répétition',
     'Scientific Contacts' => 'Contacts scientifiques',
     'Scientific Supervisors' => 'Superviseurs scientifiques',
-	'See' => 'Voir',
+'See' => 'Voir',
     'Select method alias...' => 'Sélectionnez l\'alias de la méthode',
     'Select trait alias...' => 'Sélectionnez l\'alias du trait',
     'Select unit alias...' => 'Sélectionnez l\'alias de l\'unité',

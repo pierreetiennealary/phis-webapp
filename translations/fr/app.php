@@ -166,7 +166,7 @@ return [
     'Show Images' => 'Afficher les Images',
     'Spectral hemispheric reflectance file' => 'Fichier de réflectance hémisphérique spectrale',
     'Spectralon' => 'Spectralon',
-	'Species' => 'Espèce',
+'Species' => 'Espèce',
     'Status' => 'Statut',
     'Subproject Type' => 'Type de sous projet', 
     'Subproject Of' => 'Sous-projet de',

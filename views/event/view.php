@@ -1,13 +1,12 @@
 <?php
 
-//**********************************************************************************************
+//******************************************************************************
 //                                       view.php 
 // PHIS-SILEX
 // Copyright © INRA 2017
 // Creation date: Feb 2019
 // Contact: andreas.garcia@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
-//***********************************************************************************************
-
+//******************************************************************************
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\data\ArrayDataProvider;
@@ -17,6 +16,7 @@ use app\components\widgets\AnnotationGridViewWidget;
 use app\components\widgets\PropertyWidget;
 use app\components\widgets\ConcernedItemGridViewWidget;
 use app\controllers\EventController;
+use app\models\yiiModels\YiiEventModel;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\YiiEventModel */
@@ -27,11 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="event-view">
 
-    <h1><?= Html::encode(Vocabulary::prettyUri($model->type)) ?></h1>
+    <h1><?= Html::encode(Vocabulary::prettyUri($model->rdfType)) ?></h1>
     
     <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->uri], ['class' => 'btn btn-primary']) ?>
-        <!-- Add annotation button -->
+        <!-- Annotation button -->
         <?= AnnotationButtonWidget::widget([AnnotationButtonWidget::TARGETS => [$model->uri]]); ?>
     </p>
 
@@ -39,9 +38,9 @@ $this->params['breadcrumbs'][] = $this->title;
     DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'uri',
-            'type',
-            'date'
+            YiiEventModel::URI,
+            YiiEventModel::TYPE,
+            YiiEventModel::DATE
         ],
     ])
     ?>
@@ -49,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Properties -->
     <?=
     PropertyWidget::widget([
-        'properties' => $model->properties,
+        YiiEventModel::PROPERTIES => $model->properties,
         'title' =>  Yii::t('app', 'Specific properties')
     ]);
     ?>
@@ -68,12 +67,13 @@ $this->params['breadcrumbs'][] = $this->title;
         ); 
     ?>
     
-    <!-- Linked Annotation-->
-    <?= AnnotationGridViewWidget::widget(
-            [
-                 AnnotationGridViewWidget::ANNOTATIONS => ${EventController::ANNOTATIONS_DATA}
-            ]
-        ); 
+    <!-- Linked Annotations-->
+    <?= 
+    AnnotationGridViewWidget::widget(
+        [
+             AnnotationGridViewWidget::ANNOTATIONS => ${EventController::ANNOTATIONS_DATA}
+        ]
+    ); 
     ?>
 
 </div>

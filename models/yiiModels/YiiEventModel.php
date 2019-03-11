@@ -1,5 +1,4 @@
 <?php
-
 //******************************************************************************
 //                             YiiEventModel.php
 // SILEX-PHIS
@@ -7,7 +6,6 @@
 // Creation date: 02 Jan. 2019
 // Contact: andreas.garcia@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
 //******************************************************************************
-
 namespace app\models\yiiModels;
 
 use Yii;
@@ -18,11 +16,9 @@ use app\models\wsModels\WSEventModel;
 use app\models\wsModels\WSConstants;
 
 /**
- * The yii model for an event 
+ * The Yii model for an event 
  * @update [Andréas Garcia] 15 Feb., 2019: add properties handling
- * @see app\models\wsModels\WSTripletModel
- * @see app\models\wsModels\WSUriModel
- * @see app\models\wsModels\WSActiveRecord
+ * @see app\models\wsModels\WSEventModel
  * @author Andréas Garcia <andreas.garcia@inra.fr>
  */
 class YiiEventModel extends WSActiveRecord {
@@ -38,8 +34,8 @@ class YiiEventModel extends WSActiveRecord {
      * @example http://www.opensilex.org/vocabulary/oeev#MoveFrom
      * @var string
      */
-    public $type;
-    const TYPE = "type";
+    public $rdfType;
+    const TYPE = "rdfType";
     
     /**
      * @example 2019-01-02T00:00:00+01:00
@@ -49,21 +45,21 @@ class YiiEventModel extends WSActiveRecord {
     const DATE = "date";
     
     /**
-     * The concerned items of the event
+     * Concerned items of the event
      * @var array
      */
     public $concernedItems; 
     const CONCERNED_ITEMS = "concernedItems";
     
     /**
-     * The properties of the event
+     * Properties of the event
      * @var array 
      */
     public $properties;
     const PROPERTIES = "properties";
     
     /**
-     * The annotations of the event
+     * Annotations of the event
      * @var array
      */
     public $annotations; 
@@ -81,14 +77,18 @@ class YiiEventModel extends WSActiveRecord {
      */
     public function rules() {
        return [ 
-           [[self::URI], 'required'],
-           [[
-                self::TYPE, 
-                self::DATE,
-                self::CONCERNED_ITEMS, 
-                self::PROPERTIES, 
-                self::ANNOTATIONS
-            ] , 'safe']
+           [
+                [
+                    self::URI, 
+                    self::DATE,
+                    self::TYPE, 
+                    self::CONCERNED_ITEMS
+                ], 'required'],
+           [
+               [
+                    self::PROPERTIES, 
+                    self::ANNOTATIONS
+                ] , 'safe']
         ]; 
     }
     
@@ -104,13 +104,13 @@ class YiiEventModel extends WSActiveRecord {
     }
     
     /**
-     * Allows to fill the attributes with the informations in the array given 
+     * Allows to fill the attributes with the information in the array given 
      * @param array $array array key => value which contains the metadata of 
      * an event
      */
     protected function arrayToAttributes($array) {
         $this->uri = $array[self::URI];
-        $this->type = $array[self::TYPE];
+        $this->rdfType = $array[self::TYPE];
         if ($array[self::CONCERNED_ITEMS]) {
             foreach ($array[self::CONCERNED_ITEMS] as $concernedItemInArray) {
                 $eventConcernedItem  = new YiiConcernedItemModel();
@@ -133,8 +133,7 @@ class YiiEventModel extends WSActiveRecord {
     }
 
     /**
-     * Get the detailed event corresponding to the given uri
-     * 
+     * Get the detailed event corresponding to the given URI
      * @param type $sessionToken
      * @param type $uri
      * @return $this
@@ -155,10 +154,7 @@ class YiiEventModel extends WSActiveRecord {
     }
 
     /**
-     * Calls web service and returns the list of events types
-     * //SILEX:todo Not used yet. Will be used to generate a dropdown list to
-     * select the event type filter
-     * //\SILEX
+     * Call web service and return the list of events types
      * @param sessionToken
      * @return list of the events types
      */

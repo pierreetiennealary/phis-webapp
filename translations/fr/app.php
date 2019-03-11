@@ -3,18 +3,20 @@
 //                                       app.php
 // SILEX-PHIS
 // Copyright © INRA 2017
-// Creation date:  Mar, 2017
+// Creation date:  Mar., 2017
 // Contact: morgane.vidal@inra.fr,arnaud.charleroy, anne.tireau@inra.fr, pascal.neveu@inra.fr
 //******************************************************************************
 
 /**
  * French translations of this application
  * @link https://www.yiiframework.com/extension/translate
- * @update [Arnaud Charleroy] 24 August, 2018 : widgets translations
+ * @update [Arnaud Charleroy] 24 August, 2018: widgets translations
  */
 
 use app\components\widgets\AnnotationGridViewWidget;
 use app\models\yiiModels\YiiAnnotationModel;
+use app\components\widgets\EventButtonWidget;
+use app\components\widgets\AnnotationButtonWidget;
 
 return [
     '{n, plural, =1{Project} other{Projects}}' => '{n, plural, =1{Projet} other{Projets}}',
@@ -33,7 +35,8 @@ return [
     'Add Document' => 'Ajouter un document',
     'Add Document Script' => 'Ajouter un script',
     'Add Sensors' => 'Ajouter des Capteurs',
-    app\components\widgets\AnnotationButtonWidget::ADD_ANNOTATION_LABEL => 'Ajouter une Annotation',
+    AnnotationButtonWidget::ADD_ANNOTATION_LABEL => 'Ajouter annotation',
+    EventButtonWidget::ADD_EVENT_LABEL => 'Ajouter événement',
     'Add Vectors' => 'Ajouter des Vecteurs',
     'Address' => 'Adresse',
     'Admin' => 'Administrateur',
@@ -58,8 +61,10 @@ return [
     'Comment' => 'Commentaire',
     'Concerns' => 'Concerne',
     'Concerned Items' => 'Items concernés',
-    'Concerned Item Type' => 'Type de l\'Item Concerné',
-    'Concerned Item URI' => 'URI de l\'Item Concerné',
+    'Concerned Item' => 'Item concerné',
+    'Concerned Item Type' => 'Type de l\'item concerné',
+    'Concerned Item URI' => 'URI de l\'item concerné',
+    'Concerned items URIs' => 'URIs des items Concernés',
     'Concerned Experimentations' => 'Expérimentations Concernées',
     'Concerned Projects' => 'Projets concernés',
     'Creation Date' => 'Date de Création',
@@ -73,6 +78,7 @@ return [
     'Date Of Last Calibration' => 'Date de Dernier Étalonnage',
     'Date Of Purchase' => 'Date d\'Achat',
     'Date Start' => 'Date de début',
+    'Description' => 'Description',
     'Diameter' => 'Diamètre',
     'Diameter (m)' => 'Diamètre (m)',
     'Document Type' => 'Type du Document',
@@ -117,7 +123,7 @@ return [
     'Level' => 'Niveau',
     'Linked Agronomical Objects' => 'Objets Agronomiques Liés',
     'Linked Documents' => 'Documents Liés',
-    AnnotationGridViewWidget::LINKED_ANNOTATIONS => "Annotations liée(s)",
+    AnnotationGridViewWidget::LINKED_ANNOTATIONS => "Annotations liées",
     AnnotationGridViewWidget::NO_LINKED_ANNOTATIONS => "Aucune annotation liée",
     'Line' => 'Ligne',
     'Login' => 'Connexion',
@@ -151,6 +157,7 @@ return [
     'Real Number' => 'Nombre Réel', 
     'Rectangular' => 'Rectangulaire',
     'Reference URI' => 'URI de Référence',
+    'Register an event' => 'Enregistrer un événement',
     'Related References' => 'Références Externes',
     'Relation' => 'Relation',
     'Relation Type' => 'Type de Relation',
@@ -175,6 +182,7 @@ return [
     'Subproject Of' => 'Sous-projet de',
     'Team' => 'Équipe',
     'Technical Supervisors' => 'Superviseurs techniques',
+    'Timezone offset' => 'Fuseau horaire',
     'Title' => 'Titre',
     'Tools' => 'Outils',
     'Trait' => 'Trait',

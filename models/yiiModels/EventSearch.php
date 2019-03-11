@@ -1,5 +1,4 @@
 <?php
-
 //******************************************************************************
 //                               EventSearch.php
 // PHIS-SILEX
@@ -7,7 +6,6 @@
 // Creation date: 02 jan. 2019
 // Contact: andreas.garcia@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
 //******************************************************************************
-
 namespace app\models\yiiModels;
 
 use Yii;
@@ -140,8 +138,8 @@ class EventSearch extends YiiEventModel {
         parent::setAttributes($values, $safeOnly);
             
         if (is_array($values)) {
-            if (isset($values[EventSearch::DATE_RANGE])) {
-                $dateRange = $values[EventSearch::DATE_RANGE];
+            if (isset($values[self::DATE_RANGE])) {
+                $dateRange = $values[self::DATE_RANGE];
                 
                 //SILEX:info
                 // We shouldn't control the date range format because the WS 
@@ -217,13 +215,13 @@ class EventSearch extends YiiEventModel {
              * //\SILEX:info
              */
             $dateStringWithoutT = str_replace("T", " ", $dateString);
-            $date = DateTime::createFromFormat(Yii::$app->params['standardDateTimeFormatPhp'], $dateStringWithoutT);
+            $date = DateTime::createFromFormat(Yii::$app->params['dateTimeFormatPhp'], $dateStringWithoutT);
             $dateRangeStartParseErrorCount = DateTime::getLastErrors()['error_count']; 
             if ($dateRangeStartParseErrorCount >= 1) {
                 error_log("dateRangeStartParseErrorMessages ".print_r(DateTime::getLastErrors()['errors'], true)); 
                 return false;
             }
-            else if ($date->format(Yii::$app->params['standardDateTimeFormatPhp']) == $dateStringWithoutT) {
+            else if ($date->format(Yii::$app->params['dateTimeFormatPhp']) == $dateStringWithoutT) {
                 return true;
             }
             else {
@@ -264,10 +262,10 @@ class EventSearch extends YiiEventModel {
      */
     public function attributesToArray() {
         return [
-            YiiEventModel::TYPE => $this->type,
-            EventSearch::CONCERNED_ITEM_LABEL => $this->concernedItemLabel,
-            EventSearch::DATE_RANGE_START => $this->dateRangeStart,
-            EventSearch::DATE_RANGE_END => $this->dateRangeEnd
+            YiiEventModel::TYPE => $this->rdfType,
+            self::CONCERNED_ITEM_LABEL => $this->concernedItemLabel,
+            self::DATE_RANGE_START => $this->dateRangeStart,
+            self::DATE_RANGE_END => $this->dateRangeEnd
         ];
     }
 }

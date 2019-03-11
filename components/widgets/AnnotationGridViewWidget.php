@@ -6,7 +6,6 @@
 // Creation date: 23 Aug, 2018
 // Contact: arnaud.charleroy@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
 //******************************************************************************
-
 namespace app\components\widgets;
 
 use yii\base\Widget;
@@ -43,7 +42,7 @@ class AnnotationGridViewWidget extends Widget {
 
     /**
      * Render the annotation list
-     * @return string the html string rendered
+     * @return string the HTML string rendered
      */
     public function run() {
         if ($this->annotations->getCount() == 0) {
@@ -54,10 +53,10 @@ class AnnotationGridViewWidget extends Widget {
                 'dataProvider' => $this->annotations,
                 'columns' => [
                     [
-                        'label' => Yii::t('app',YiiAnnotationModel::COMMENTS_LABEL),
-                        'attribute' => YiiAnnotationModel::COMMENTS,
+                        'label' => Yii::t('app',YiiAnnotationModel::BODY_VALUES_LABEL),
+                        'attribute' => YiiAnnotationModel::BODY_VALUES,
                         'value' => function ($model) {
-                            return implode(('<br>,'), $model->comments);
+                            return implode(('<br>,'), $model->bodyValues);
                         }
                     ],
                     YiiAnnotationModel::CREATOR =>

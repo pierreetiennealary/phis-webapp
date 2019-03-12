@@ -61,7 +61,7 @@ class DataFileSearch extends YiiDataFileModel {
         //3. Request to the web service and return result
         $params = $this->attributesToArray();
         unset($params['uri']);
-        $findResult = $this->find($sessionToken);
+        $findResult = $this->find($sessionToken, $params);
         
         if (is_string($findResult)) {
             return $findResult;

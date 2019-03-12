@@ -28,9 +28,9 @@ use app\models\wsModels\WSConstants;
 
 /**
  * CRUD actions for YiiExperimentModel
- * @update [Andréas Garcia] 11 March, 2019: Add event widget
  * @see yii\web\Controller
  * @see app\models\yiiModels\YiiExperimentModel
+ * @update [Andréas Garcia] 11 March, 2019: Add event widget
  * @author Morgane Vidal <morgane.vidal@inra.fr>
  */
 class ExperimentController extends Controller {
@@ -53,8 +53,8 @@ class ExperimentController extends Controller {
     }
     
     /**
-     * Search an experiment by uri.
-     * @param String $uri searched experiment's uri
+     * Searches an experiment by URI.
+     * @param String $uri searched experiment's URI
      * @return mixed YiiExperimentModel : the searched experiment
      *               "token" if the user must log in
      */
@@ -73,7 +73,7 @@ class ExperimentController extends Controller {
     }
     
     /**
-     * List all Experiments
+     * Lists all Experiments
      * @return mixed
      */
     public function actionIndex() {
@@ -128,6 +128,7 @@ class ExperimentController extends Controller {
      * @return mixed
      */
     public function actionView($id) {  
+        //0. Get request parameters
         $searchParams = Yii::$app->request->queryParams;
         
         //1. Get the experiment's informations
@@ -143,16 +144,17 @@ class ExperimentController extends Controller {
         $searchAgronomicalObject->experiment = $id;
         $agronomicalObjects = $searchAgronomicalObject->search(Yii::$app->session['access_token'], $searchParams);
          
-        //4. get project annotations
+        //4. get annotations
         $searchAnnotationModel = new AnnotationSearch();
         $searchAnnotationModel->targets[0] = $id;
         $experimentAnnotations = $searchAnnotationModel->search(Yii::$app->session[WSConstants::ACCESS_TOKEN], [AnnotationSearch::TARGET_SEARCH_LABEL => $id]);
         
-        //5. get event
+        //5. get events
         $searchEventModel = new EventSearch();
         $searchEventModel->concernedItemUri = $id;
-        $events = $searchEventModel->searchEvents(Yii::$app->session[WSConstants::ACCESS_TOKEN], [EventSearch::CONCERNED_ITEM_URI => $id]);
-        error_log("searchEventModelou ". print_r($events, true));
+        $searchEventModel->pageSize = Yii::$app->params['eventWidgetPageSize'];
+        $events = $searchEventModel->searchEvents(Yii::$app->session[WSConstants::ACCESS_TOKEN], $searchParams);
+
         //6. get all variables
         $variableModel = new YiiVariableModel();
         $variables = $variableModel->getInstancesDefinitionsUrisAndLabel(Yii::$app->session['access_token']);

@@ -1,7 +1,7 @@
 <?php
 
 //******************************************************************************
-//                                       view.php 
+//                                 view.php 
 // PHIS-SILEX
 // Copyright © INRA 2017
 // Creation date: Feb 2019
@@ -18,8 +18,11 @@ use app\components\widgets\ConcernedItemGridViewWidget;
 use app\controllers\EventController;
 use app\models\yiiModels\YiiEventModel;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\YiiEventModel */
+/** 
+ * @update [Andréas Garcia] 06 March, 2019: add event button and widget 
+ * @var $this yii\web\View
+ * @var $model app\models\YiiEventModel
+ */
 
 $this->title = $model->uri;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', '{n, plural, =1{Event} other{Events}}', ['n' => 2]), 'url' => ['index']];

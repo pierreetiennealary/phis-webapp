@@ -17,6 +17,8 @@ use app\models\yiiModels\YiiEventModel;
 use app\models\yiiModels\EventPost;
 use app\models\yiiModels\YiiModelsConstants;
 use app\models\yiiModels\YiiUserModel;
+use app\models\yiiModels\InfrastructureSearch;
+use app\models\yiiModels\YiiPropertyModel;
 use app\models\wsModels\WSConstants;
 use app\components\helpers\SiteMessages;
 
@@ -28,19 +30,20 @@ use app\components\helpers\SiteMessages;
  */
 class EventController extends Controller {
     CONST ANNOTATIONS_DATA = "annotations";
+    CONST INFRASTRUCTURES_DATA = "infrastructures";
+    CONST INFRASTRUCTURES_DATA_URI = "infrastructureUri";
+    CONST INFRASTRUCTURES_DATA_LABEL = "infrastructureLabel";
+    CONST INFRASTRUCTURES_DATA_TYPE = "infrastructureType";
+    CONST EVENT_TYPES = "eventTypes";
     
     /**
-     * List the events
+     * Lists the events
      * @return mixed
      */
     public function actionIndex() {
         $searchModel = new EventSearch();
         
         $searchParams = Yii::$app->request->queryParams;
-        if (isset($searchParams[YiiModelsConstants::PAGE])) {
-            $searchParams[YiiModelsConstants::PAGE]--;
-        }
-
         $searchResult = $searchModel->searchEvents(Yii::$app->session[WSConstants::ACCESS_TOKEN], $searchParams);
         
         if (is_string($searchResult)) {
@@ -59,22 +62,22 @@ class EventController extends Controller {
     }
 
     /**
-     * Display the detail of an event
+     * Displays the detail of an event
      * @param $id URI of the event
      * @return mixed redirect in case of error otherwise return the "view" view
      */
     public function actionView($id) {
         // Fill the event model with the information
         $event = new YiiEventModel();
-        $eventDetailed = $event->getEventDetailed(Yii::$app->session['access_token'], $id);
+        $eventDetailed = $event->getEventDetailed(Yii::$app->session[WSConstants::ACCESS_TOKEN], $id);
 
         // Get documents
         $searchDocumentModel = new DocumentSearch();
         $searchDocumentModel->concernedItemFilter = $id;
-        $documents = $searchDocumentModel->search(Yii::$app->session['access_token'], ["concernedItem" => $id]);
+        $documents = $searchDocumentModel->search(Yii::$app->session[WSConstants::ACCESS_TOKEN], ["concernedItem" => $id]);
 
         // Render the view of the event
-        if (is_array( $eventDetailed) && isset( $eventDetailed["token"])) {
+        if (is_array($eventDetailed) && isset($eventDetailed[WSConstants::TOKEN])) {
             return $this->redirect(Yii::$app->urlManager->createUrl(SiteMessages::SITE_LOGIN_PAGE_ROUTE));
         } else {
             return $this->render('view', [
@@ -92,22 +95,47 @@ class EventController extends Controller {
      * Get the event types URIs
      * @return event types URIs 
      */
-    public function getEventsTypesLabels() {
+    public function getEventsTypes() {
         $model = new YiiEventModel();
         
         $eventsTypes = [];
         $model->page = 0;
-        $eventsTypesConcepts = $model->getEventsTypes(Yii::$app->session['access_token']);
-        if ($eventsTypesConcepts === "token") {
-            return "token";
+        $model->pageSize = 1000;
+        $eventsTypesConcepts = $model->getEventsTypes(Yii::$app->session[WSConstants::ACCESS_TOKEN]);
+        if ($eventsTypesConcepts === WSConstants::TOKEN) {
+            return WSConstants::TOKEN;
         } else {
-            $totalPages = $eventsTypesConcepts[WSConstants::PAGINATION][WSConstants::TOTAL_PAGES];
-            foreach ($eventsTypesConcepts[WSConstants::DATA] as $sensorType) {
-                $eventsTypes[] = $sensorType->uri;
+            foreach ($eventsTypesConcepts[WSConstants::DATA] as $eventType) {
+                $eventsTypes[$eventType->uri] = $eventType->uri;
             }
         }
         
         return $eventsTypes;
+    }
+    
+    /**
+     * Get all infrastructures
+     * @return experiments 
+     */
+    public function getInfrastructuresUrisTypesLabels() {
+        $model = new InfrastructureSearch();
+        $model->page = 0;
+        $infrastructuresUrisTypesLabels = [];
+        $infrastructures = $model->search(Yii::$app->session['access_token'], null);
+        if ($infrastructures === WSConstants::TOKEN) {
+            return WSConstants::TOKEN;
+        } else {
+            foreach ($infrastructures->models as $infrastructure) {
+                $infrastructuresUrisTypesLabels[] =
+                    [
+                        self::INFRASTRUCTURES_DATA_URI => $infrastructure->uri,
+                        self::INFRASTRUCTURES_DATA_LABEL => $infrastructure->label,
+                        self::INFRASTRUCTURES_DATA_TYPE => $infrastructure->rdfType
+                    ];
+            }
+        }
+        
+        return $infrastructuresUrisTypesLabels;
     }
     
     /**
@@ -132,6 +160,25 @@ class EventController extends Controller {
             $eventModel->creator = $userModel->uri;
             $eventModel->isNewRecord = true;
             
+            // Set properties
+            $property = new YiiPropertyModel();
+            switch ($eventModel->rdfType) {
+                case "http://www.opensilex.org/vocabulary/oeev#MoveFrom":
+                    $property->value = $eventModel->propertyFrom;
+                    $property->rdfType = $eventModel->propertyType;
+                    $property->relation = "http://www.opensilex.org/vocabulary/oeev#from";
+                    break;
+                case "http://www.opensilex.org/vocabulary/oeev#MoveTo":
+                    $property->value = $eventModel->propertyTo;
+                    $property->rdfType = $eventModel->propertyType;
+                    $property->relation = "http://www.opensilex.org/vocabulary/oeev#to";
+                    break;
+                default : 
+                    $property = null;
+                    break;
+            }
+            $eventModel->properties = [$property];
+            
             // If post data, insert the submitted form
             $dataToSend[] =  $eventModel->attributesToArray();
             error_log("dataToSend ".print_r($dataToSend, true));
@@ -150,15 +197,11 @@ class EventController extends Controller {
             }
         } else {
             // If no post data display the create form
-            $types = [];
-            foreach($this->getEventsTypesLabels() as $type) {
-                $types[$type] = $type;
-            }
-            $this->view->params["eventPossibleTypes"] = $types;
+           
+            $this->view->params[self::EVENT_TYPES] = $this->getEventsTypes();
+            $this->view->params[self::INFRASTRUCTURES_DATA] = $this->getInfrastructuresUrisTypesLabels();
 
-            return $this->render('create', [
-                'model' =>  $eventModel
-            ]);
+            return $this->render('create', ['model' =>  $eventModel]);
         }
     }
 }

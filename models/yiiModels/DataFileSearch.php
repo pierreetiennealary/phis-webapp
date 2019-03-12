@@ -65,9 +65,9 @@ class DataFileSearch extends YiiDataFileModel {
         //3. Request to the web service and return result
         $params = $this->attributesToArray();
         unset($params['uri']);
-        $findResult = $this->find($sessionToken, $params);
+        $findResult = $this->find($sessionToken);
         
-        if (is_string($findResult, $params)) {
+        if (is_string($findResult)) {
             return $findResult;
         } else if (isset($findResult->{'metadata'}->{'status'}[0]->{'exception'}->{'details'}) 
                     && $findResult->{'metadata'}->{'status'}[0]->{'exception'}->{'details'} === WSConstants::TOKEN) {

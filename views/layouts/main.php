@@ -143,6 +143,18 @@ ToastrAsset::register($this);
 //                            ]
                             //\SILEX:info
                         ]];
+        $menuItems[] = ['label' => Yii::t('app', 'Data Analysis'), 
+                        'items' => [
+                            [
+                                'label' => Icon::show('chart-bar', ['class' => 'fa-large'], Icon::FA) . " " . Yii::t('app', '{n, plural, =1{Standalone R App} other{Standalone R Apps}}', ['n' => 2]), 
+                                'url' => ['/data-analysis/index' ,"integrated" => false],
+                            ],
+                            [
+                                'label' => Icon::show('chart-bar', ['class' => 'fa-large'], Icon::FA) . " " . Yii::t('app', '{n, plural, =1{Integrated R App} other{Integrated R Apps}}', ['n' => 2]), 
+                                'url' => ['/data-analysis/index',"integrated" => true],
+                            ]
+                         ]
+                        ];
         $menuItems[] = ['label' => Yii::t('app', 'Tools'),
                         'items' => [
                                 [

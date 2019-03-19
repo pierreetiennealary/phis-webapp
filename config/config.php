@@ -17,8 +17,8 @@ class config {
     
     public static function path() {
 
-        $appli = 'phis-webapp';
-        $hostname = 'localhost';
+        $appli = 'test';
+        $hostname = '138.102.159.37';
         
         $basePath = $appli.'/web';
         
@@ -31,7 +31,7 @@ class config {
             'basePath' => '/'.$basePath.'/',
             'hostnameURL' => 'http://'.$hostname.'/'.$appli,
             'documentsUrl' => '../web/documents/',
-            'ocpuServer' => 'http://localhost:8004/ocpu/',
+            'ocpuServer' => 'http://'.$hostname.':8004/ocpu/',
             //Concepts, relations uri
             'cVariable' => 'http://www.opensilex.org/vocabulary/oeso#Variable',
             'cTrait' => 'http://www.opensilex.org/vocabulary/oeso#Trait',

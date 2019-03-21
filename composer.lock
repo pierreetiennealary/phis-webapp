@@ -2458,12 +2458,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenSILEX/opencpu-client-php.git",
-                "reference": "0e647d113cb299e91407c8cd0b54fb90e63e43aa"
+                "reference": "bd048be0c3fb26863b4c63af2794efe3f0e8a150"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenSILEX/opencpu-client-php/zipball/0e647d113cb299e91407c8cd0b54fb90e63e43aa",
-                "reference": "0e647d113cb299e91407c8cd0b54fb90e63e43aa",
+                "url": "https://api.github.com/repos/OpenSILEX/opencpu-client-php/zipball/bd048be0c3fb26863b4c63af2794efe3f0e8a150",
+                "reference": "bd048be0c3fb26863b4c63af2794efe3f0e8a150",
                 "shasum": ""
             },
             "require": {
@@ -2505,7 +2505,7 @@
                 "source": "https://github.com/OpenSILEX/opencpu-client-php/tree/master",
                 "issues": "https://github.com/OpenSILEX/opencpu-client-php/issues"
             },
-            "time": "2019-03-13T06:53:51+00:00"
+            "time": "2019-03-21T16:28:53+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",

@@ -49,32 +49,45 @@ class ConcernedItemGridViewWidget extends Widget {
         } else {
             $htmlRendered = "<h3>" . Yii::t('app', 'Concerned Items') . "</h3>";
             $htmlRendered .= GridView::widget([
-                        'dataProvider' => $this->concernedItems,
-                        'columns' => [
-                            [
-                                'label' => Yii::t('app',YiiConcernedItemModel::URI),
-                                'attribute' => YiiConcernedItemModel::URI,
-                                'value' => function ($model) {
-                                    return Vocabulary::prettyUri($model->uri);
-                                }
-                            ],
-                            YiiConcernedItemModel::RDF_TYPE =>
-                            [
-                                'label' => Yii::t('app', 'Type'),
-                                'attribute' => YiiConcernedItemModel::RDF_TYPE,
-                                'value' => function($model) {
-                                    return Vocabulary::prettyUri($model->rdfType);
-                                },
-                            ],
-                            YiiConcernedItemModel::LABELS => 
-                            [
-                                'label' => Yii::t('app', YiiConcernedItemModel::LABELS),
-                                'attribute' => YiiConcernedItemModel::LABELS,
-                                'value' => function($model) {
-                                    return implode((', '), $model->labels);
-                                }
-                            ]
-                        ],
+                'dataProvider' => $this->concernedItems,
+                'columns' => [
+                    [
+                        'label' => Yii::t('app',YiiConcernedItemModel::URI),
+                        'attribute' => YiiConcernedItemModel::URI,
+                        'value' => function ($model) {
+                            return Vocabulary::prettyUri($model->uri);
+                        }
+                    ],
+                    YiiConcernedItemModel::RDF_TYPE =>
+                    [
+                        'label' => Yii::t('app', 'Type'),
+                        'attribute' => YiiConcernedItemModel::RDF_TYPE,
+                        'value' => function($model) {
+                            return Vocabulary::prettyUri($model->rdfType);
+                        },
+                    ],
+                    YiiConcernedItemModel::LABELS => 
+                    [
+                        'label' => Yii::t('app', YiiConcernedItemModel::LABELS),
+                        'attribute' => YiiConcernedItemModel::LABELS,
+                        'value' => function($model) {
+                            return implode((', '), $model->labels);
+                        }
+                    ],
+                     /**  
+                      * //SILEX:todo Generate links to access to the concerned 
+                      * items views by clincking on the "eye" icon
+                      * //\SILEX  
+                      */   
+//                    ['class' => 'yii\grid\ActionColumn',
+//                        'template' => '{view}',
+//                        'buttons' => [
+//                            'view' => function($url, $model, $key) {
+//                                return Html::a(Icon::show('eye-open', [], Icon::BSG), ['annotation/view', 'id' => $model->uri]);
+//                            },
+//                        ]
+//                    ],
+                ],
             ]);
         }
         return $htmlRendered;

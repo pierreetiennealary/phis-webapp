@@ -43,6 +43,7 @@ class YiiDataFileModel extends WSActiveRecord {
      */
     public $concernedItems;
     const CONCERNED_ITEMS = "concernedItems";
+    /**
     
     /**
      * Initialize wsModel. In this class, wsModel is a WSImageModel

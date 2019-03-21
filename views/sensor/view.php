@@ -58,7 +58,14 @@ foreach ($model->properties as $property) {
 
     <p>
         <?php
-        if (Yii::$app->session['isAdmin']) { ?>
+            if (Yii::$app->session['isAdmin']) {
+                $options = ['class' => 'btn btn-success'];
+                if ($sensorProfilePropertiesCount > 0) {
+                    $options["disabled"] = "disabled";
+                    echo Html::a(Yii::t('app', 'Characterize Sensor'), null, $options);
+                } else {
+                    echo Html::a(Yii::t('app', 'Characterize Sensor'), ['characterize', 'sensorUri' => $model->uri], $options);
+                } ?>
             <?= Html::a(Yii::t('app', 'Characterize Sensor'), ['characterize', 'sensorUri' => $model->uri], ['class' => 'btn btn-success']); ?>
             <?= Html::a(Yii::t('app', 'Add Document'), [
                 'document/create', 

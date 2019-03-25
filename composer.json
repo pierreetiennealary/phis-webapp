@@ -39,7 +39,8 @@
         "webtoucher/yii2-js-cookie": "1.0.0",
         "fortawesome/font-awesome": "v4.7.0",
         "nullref/yii2-datatables": "v1.0.4",
-        "openSILEX/opencpu-client-php": "dev-master"
+        "opensilex/opencpu-client-php": "dev-master",
+        "symfony/yaml": "v3.4.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "2.0.14",

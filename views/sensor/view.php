@@ -66,7 +66,6 @@ foreach ($model->properties as $property) {
                 } else {
                     echo Html::a(Yii::t('app', 'Characterize Sensor'), ['characterize', 'sensorUri' => $model->uri], $options);
                 } ?>
-            <?= Html::a(Yii::t('app', 'Characterize Sensor'), ['characterize', 'sensorUri' => $model->uri], ['class' => 'btn btn-success']); ?>
             <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->uri], ['class' => 'btn btn-primary']); ?>
             <?= Html::a(Yii::t('app', 'Add Document'), [
                 'document/create', 

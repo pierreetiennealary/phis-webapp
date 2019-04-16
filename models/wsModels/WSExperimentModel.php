@@ -53,16 +53,6 @@ class WSExperimentModel extends \openSILEX\guzzleClientPHP\WSModel {
         } else {
             return $requestRes;
         }
-    }   
-        
-    public function getExperimentsList($sessionToken,$params) {
-        $requestRes = $this->get($sessionToken, "", $params);
-        
-        if (isset($requestRes->{WSConstants::RESULT}->{WSConstants::DATA}))  {
-            return (array) $requestRes->{WSConstants::RESULT}->{WSConstants::DATA};
-        } else {
-            return $requestRes;
-        }
     }
 
     /**

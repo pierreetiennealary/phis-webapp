@@ -9,41 +9,35 @@
 //******************************************************************************
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use app\models\yiiModels\DataAnalysisAppSearch;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\yiiModels\DataAnalysisAppSearch; */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $searchModel app\models\yiiModels\DataAnalysisAppSearch */
+/* @var $dataProvider array */
 
-$this->title = Yii::t('app', '{n, plural, =1{Stat/Vizu Application} other{Stat/Vizu Applications}}', ['n' => 2]);
+$this->title = Yii::t('app', 
+        '{n, plural, =1{Statistical/Visualization Application} other{Statistical/Visualization Applications}}',
+        ['n' => 2]
+        );
 $this->params['breadcrumbs'][] = $this->title;
 if (Yii::$app->session->hasFlash('scriptNotAvailable')) {
-    echo Html::tag("p", "Script not available", ["class" => "alert alert-danger"]);
+    echo Html::tag("p", Yii::t('app/messages', 'Application not available'), ["class" => "alert alert-danger"]);
 }
 
 echo Html::beginTag("div", ["class" => "data-analysis-index"]);
 echo Html::beginTag("div", ["class" => "row"]);
+
+// each thumbnail (R application vignette)
 foreach ($dataProvider as $function => $appInfo) {
-    if ($integrated) {
-        $appHref =  Url::to([
-                    "data-analysis/run-script/", 
-                    "function" => $function,
-                    "rpackage" => $appInfo[DataAnalysisAppSearch::R_PACKAGE_NAME]
-                    ]);
-    } else {
-        $appHref = $appInfo[DataAnalysisAppSearch::APP_INDEX_HREF];
-    }
-    echo Html::beginTag("div", ["class" => "col-sm-6 col-md-5"]);
+    echo Html::beginTag("div", ["class" => "col-sm-5 col-md-4"]);
     echo Html::beginTag("div", ["class" => "thumbnail"]);
-    echo Html::beginTag("a", ["href" => $appHref]);
-    echo Html::img($appInfo[DataAnalysisAppSearch::VIGNETTE_IMAGE],[
+    $image = Html::img($appInfo[DataAnalysisAppSearch::APP_VIGNETTE_PATH],[
                 "class" => "img-responsive",
                 "alt" => $appInfo[DataAnalysisAppSearch::APP_SHORT_NAME]
                 ]);
-    echo Html::endTag("a");
+    echo Html::a( $image, $appInfo[DataAnalysisAppSearch::APP_INDEX_URL]);
     echo Html::beginTag("center");
-    echo Html::tag("strong", $appInfo[DataAnalysisAppSearch::FUNCTION_HELP]);
+    echo Html::tag("strong", Yii::t('app/messages', $appInfo[DataAnalysisAppSearch::APP_DESCRIPTION]));
     echo Html::endTag("center");
     echo Html::endTag("div");
     echo Html::endTag("div");

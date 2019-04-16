@@ -11,12 +11,18 @@ use yii\helpers\Html;
 use kartik\icons\Icon;
 
 /* @var $this yii\web\View */
+/* @var $appUrl string */
+/* @var $appName string */
 
-$this->title = Yii::t('app', '{n, plural, =1{Stat/Vizu Application} other{Stat/Vizu Applications}}', ['n' => 2]);
+$this->title = Yii::t('app', 
+        '{n, plural, =1{Statistical/Visualization Application} other{Statistical/Visualization Applications}}',
+        ['n' => 2]
+        );
 $this->params['breadcrumbs'][] = $this->title;
+
 echo Html::beginTag('div', ['class' => 'row']);
 echo Html::tag('h5',
-        Icon::show('flask', ['class' => 'fa-large'], Icon::FA). "Experimental version",
+        Icon::show('flask', ['class' => 'fa-large'], Icon::FA). Yii::t('app/messages', 'Experimental version'),
         ['class' => ' alert alert-info col-sm-4 col-md-3']
         );
 echo Html::endTag('div');

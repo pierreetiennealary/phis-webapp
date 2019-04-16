@@ -16,6 +16,9 @@ return [
     // Index
     'indexPageSize' => 20,
   
+    // DataAnalysis and visualization module activation
+    'dataAnalysisModule' => true,
+    
     // Forms
     'dateTimeFormatDateTimeRangePickerStandard' => 'Y-m-dTH:i:sZ',
     'dateTimeFormatDateTimePickerUserFriendly' => 'yyyy-mm-dd HH:ii:ss',

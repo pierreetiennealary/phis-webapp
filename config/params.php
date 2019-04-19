@@ -54,6 +54,8 @@ return [
     'EuropeanInfrastructure' => 'http://www.opensilex.org/vocabulary/oeso#EuropeanInfrastructure',
     'Installation' => 'http://www.opensilex.org/vocabulary/oeso#Installation',
     
+    'Provenance' => 'http://www.opensilex.org/vocabulary/oeso#Provenance',
+    
     //-------- Relations
     'aperture' => 'http://www.opensilex.org/vocabulary/oeso#aperture',
     'brdfP1' => 'http://www.opensilex.org/vocabulary/oeso#brdfP1',

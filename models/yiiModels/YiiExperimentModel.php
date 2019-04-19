@@ -349,7 +349,7 @@ class YiiExperimentModel extends WSActiveRecord {
             //2. if there are other pages, get the other experiments
             if ($this->totalPages > $this->page) {
                 $this->page++; //next page
-                $nextExperiments = $this->getExperimentsURIList($sessionToken);
+                $nextExperiments = $this->getExperimentsURIAndLabelList($sessionToken);
                 
                 $experimentsToReturn = array_merge($experimentsToReturn, $nextExperiments);
             }

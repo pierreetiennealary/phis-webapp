@@ -1,9 +1,8 @@
 <?php
-
 //******************************************************************************
 //                                 view.php 
-// PHIS-SILEX
-// Copyright © INRA 2017
+// SILEX-PHIS
+// Copyright © INRA 2019
 // Creation date: Feb 2019
 // Contact: andreas.garcia@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
 //******************************************************************************
@@ -13,8 +12,8 @@ use yii\data\ArrayDataProvider;
 use app\components\helpers\Vocabulary;
 use app\components\widgets\AnnotationButtonWidget;
 use app\components\widgets\AnnotationGridViewWidget;
-use app\components\widgets\PropertyWidget;
-use app\components\widgets\ConcernedItemGridViewWidget;
+use app\components\widgets\PropertyWidgetWithoutActions;
+use app\components\widgets\ConcernedItemGridViewWidgetWithoutActions;
 use app\controllers\EventController;
 use app\models\yiiModels\YiiEventModel;
 
@@ -29,11 +28,8 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', '{n, plural, =1{Event
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="event-view">
-
     <h1><?= Html::encode(Vocabulary::prettyUri($model->rdfType)) ?></h1>
-    
-    <p>
-        <!-- Annotation button -->
+        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->uri], ['class' => 'btn btn-primary']); ?>
         <?= AnnotationButtonWidget::widget([AnnotationButtonWidget::TARGETS => [$model->uri]]); ?>
     </p>
 
@@ -53,24 +49,23 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <!-- Properties -->
     <?=
-    PropertyWidget::widget([
+    PropertyWidgetWithoutActions::widget([
         YiiEventModel::PROPERTIES => $model->properties,
         'title' =>  Yii::t('app', 'Specific properties')
     ]);
     ?>
     
     <!-- Concerned items-->
-    <?= ConcernedItemGridViewWidget::widget(
-            [
-                 ConcernedItemGridViewWidget::CONCERNED_ITEMS => new ArrayDataProvider([
-                    'models' => $model->concernedItems,
-                    //SILEX:info
-                    //totalCount must be there too to get the pagination in GridView
-                    'totalCount' => count($model->concernedItems)
-                    //\SILEX:info
-                ])
-            ]
-        ); 
+    <?= ConcernedItemGridViewWidgetWithoutActions::widget(
+        [
+            ConcernedItemGridViewWidgetWithoutActions::CONCERNED_ITEMS_DATA_PROVIDER => new ArrayDataProvider([
+                'models' => $model->concernedItems,
+                //SILEX:info
+                //totalCount must be there too to get the pagination in GridView
+                'totalCount' => count($model->concernedItems)
+                //\SILEX:info
+            ])
+        ]); 
     ?>
     
     <!-- Linked Annotations-->
@@ -81,5 +76,4 @@ $this->params['breadcrumbs'][] = $this->title;
         ]
     ); 
     ?>
-
 </div>

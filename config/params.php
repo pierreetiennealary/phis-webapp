@@ -68,6 +68,8 @@ return [
     'EuropeanInfrastructure' => 'http://www.opensilex.org/vocabulary/oeso#EuropeanInfrastructure',
     'Installation' => 'http://www.opensilex.org/vocabulary/oeso#Installation',
     
+    'Provenance' => 'http://www.opensilex.org/vocabulary/oeso#Provenance',
+    
     // Event
     'event' => 'http://www.opensilex.org/vocabulary/oeev#Event',
     'moveFrom' => 'http://www.opensilex.org/vocabulary/oeev#MoveFrom',

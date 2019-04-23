@@ -175,7 +175,7 @@ foreach ($model->properties as $property) {
     <!-- Sensor events -->
     <?= EventGridViewWidget::widget(
             [
-                 EventGridViewWidget::EVENTS_PROVIDER => ${SensorController::EVENTS_PROVIDER}
+                 EventGridViewWidget::DATA_PROVIDER => ${SensorController::EVENTS_PROVIDER}
             ]
         ); 
     ?>

@@ -9,32 +9,32 @@
 namespace app\components\widgets;
 
 use yii\base\Widget;
-use yii\helpers\Html;
 use Yii;
-use app\models\yiiModels\YiiConcernedItemModel;
 use yii\grid\GridView;
-use app\components\helpers\Vocabulary;
-use kartik\icons\Icon;
 
 /**
  * A widget used to generate a customisable concerned item GridView interface
  * @author Andréas Garcia <andreas.garcia@inra.fr>
  */
-class ConcernedItemGridViewWidget extends Widget {
+abstract class ConcernedItemGridViewWidget extends Widget {
 
-    CONST CONCERNED_ITEMS = "concernedItems";
-    CONST NO_CONCERNED_ITEMS = "No items concerned";
+    CONST NO_CONCERNED_ITEMS_LABEL = "No items concerned";
+    CONST CONCERNED_ITEMS_LABEL = "Concerned Items";
+    CONST URI_LABEL = "URI";
+    CONST RDF_TYPE_LABEL = "Type";
+    CONST LABELS_LABEL = "Labels";
     
     /**
-     * Define the concerned items list to show
+     * Concerned items list to show.
      * @var mixed
      */
-    public $concernedItems;
+    public $concernedItemsDataProvider;
+    CONST CONCERNED_ITEMS_DATA_PROVIDER = "concernedItemsDataProvider";
 
     public function init() {
         parent::init();
         // must be not null
-        if ($this->concernedItems === null) {
+        if ($this->concernedItemsDataProvider === null) {
             throw new \Exception("Concerned items aren't set");
         }
     }
@@ -44,52 +44,21 @@ class ConcernedItemGridViewWidget extends Widget {
      * @return string the HTML string rendered
      */
     public function run() {
-        if ($this->concernedItems->getCount() == 0) {
-            $htmlRendered = "<h3>" . Yii::t('app', 'No item concerned') . "</h3>";
+        if ($this->concernedItemsDataProvider->getCount() == 0) {
+            $htmlRendered = "<h3>" . Yii::t('app', self::NO_CONCERNED_ITEMS_LABEL) . "</h3>";
         } else {
-            $htmlRendered = "<h3>" . Yii::t('app', 'Concerned Items') . "</h3>";
+            $htmlRendered = "<h3>" . Yii::t('app', self::CONCERNED_ITEMS_LABEL) . "</h3>";
             $htmlRendered .= GridView::widget([
-                'dataProvider' => $this->concernedItems,
-                'columns' => [
-                    [
-                        'label' => Yii::t('app',YiiConcernedItemModel::URI),
-                        'attribute' => YiiConcernedItemModel::URI,
-                        'value' => function ($model) {
-                            return Vocabulary::prettyUri($model->uri);
-                        }
-                    ],
-                    YiiConcernedItemModel::RDF_TYPE =>
-                    [
-                        'label' => Yii::t('app', 'Type'),
-                        'attribute' => YiiConcernedItemModel::RDF_TYPE,
-                        'value' => function($model) {
-                            return Vocabulary::prettyUri($model->rdfType);
-                        },
-                    ],
-                    YiiConcernedItemModel::LABELS => 
-                    [
-                        'label' => Yii::t('app', YiiConcernedItemModel::LABELS),
-                        'attribute' => YiiConcernedItemModel::LABELS,
-                        'value' => function($model) {
-                            return implode((', '), $model->labels);
-                        }
-                    ],
-                     /**  
-                      * //SILEX:todo Generate links to access to the concerned 
-                      * items views by clincking on the "eye" icon
-                      * //\SILEX  
-                      */   
-//                    ['class' => 'yii\grid\ActionColumn',
-//                        'template' => '{view}',
-//                        'buttons' => [
-//                            'view' => function($url, $model, $key) {
-//                                return Html::a(Icon::show('eye-open', [], Icon::BSG), ['annotation/view', 'id' => $model->uri]);
-//                            },
-//                        ]
-//                    ],
-                ],
+                        'dataProvider' => $this->concernedItemsDataProvider,
+                        'columns' => $this->getColumns(),
             ]);
         }
         return $htmlRendered;
     }
+    
+    /**
+     * Returns the columns of the GridView.
+     * @return array
+     */
+    protected abstract function getColumns(): array;
 }

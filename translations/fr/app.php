@@ -17,9 +17,10 @@ use app\models\yiiModels\YiiAnnotationModel;
 use app\components\widgets\AnnotationGridViewWidget;
 use app\components\widgets\AnnotationButtonWidget;
 use app\models\yiiModels\YiiEventModel;
-use app\models\yiiModels\EventPost;
+use app\models\yiiModels\EventCreation;
 use app\components\widgets\EventButtonWidget;
 use app\components\widgets\EventGridViewWidget;
+use app\components\widgets\ConcernedItemGridViewWidget;
 
 return [
     '{n, plural, =1{Project} other{Projects}}' => '{n, plural, =1{Projet} other{Projets}}',
@@ -38,13 +39,13 @@ return [
     'Add Document' => 'Ajouter un document',
     'Add Document Script' => 'Ajouter un script',
     'Add Sensors' => 'Ajouter des Capteurs',
-    AnnotationButtonWidget::ADD_ANNOTATION_LABEL => 'Ajouter annotation',
     'Add Vectors' => 'Ajouter des Vecteurs',
     'Address' => 'Adresse',
     'Admin' => 'Administrateur',
     'Administrative Contacts' => 'Contacts administratifs',
     'Affiliation' => 'Affiliation',
     'All Descendants' => 'Tous les Descendants',
+    AnnotationButtonWidget::ADD_ANNOTATION_LABEL => 'Ajouter annotation',
     'Acquisition session template' => 'Gabarit de session d\'aquisition',
     'Attenuator Filter' => 'Filtre Atténuateur',
     'Available' => 'Disponible',
@@ -67,6 +68,9 @@ return [
     'Concerned item type' => 'Type de l\'élément concerné',
     'Concerned item URI' => 'URI de l\'élément concerné',
     'Concerned items URIs' => 'URIs des éléments Concernés',
+    ConcernedItemGridViewWidget::URI_LABEL => 'URI',
+    ConcernedItemGridViewWidget::RDF_TYPE_LABEL => 'Type',
+    ConcernedItemGridViewWidget::LABELS_LABEL => 'Alias',
     'Concerned Experimentations' => 'Expérimentations Concernées',
     'Concerned Projects' => 'Projets concernés',
     'Creation Date' => 'Date de Création',
@@ -96,10 +100,10 @@ return [
     EventGridViewWidget::EVENTS_LABEL => "Événements",
     EventGridViewWidget::NO_EVENT_LABEL => "Pas d'événement",
     YiiEventModel::TYPE => "Type",
-    EventPost::PROPERTY_HAS_PEST_LABEL => "hasPest",
-    EventPost::PROPERTY_FROM_LABEL => "depuis",
-    EventPost::PROPERTY_TO_LABEL => "jusqu'à",
-    EventPost::PROPERTY_TYPE_LABEL => "Type de la propriété",
+    EventCreation::PROPERTY_HAS_PEST_LABEL => "hasPest",
+    EventCreation::PROPERTY_FROM_LABEL => "depuis",
+    EventCreation::PROPERTY_TO_LABEL => "jusqu'à",
+    EventCreation::PROPERTY_TYPE_LABEL => "Type de la propriété",
     'Error' => 'Erreur',
     'Experimental Organization' => 'Organisation expérimentale',
     'Experiment Modalities' => 'Modalités Expérimentales',
@@ -148,7 +152,6 @@ return [
     'Model' => 'Modèle',
     'Name' => 'Nom',
     'No' => 'Non',
-    'No item concerned' => 'Aucun élément concerné',
     'No Specific Property' => 'Aucune Propriété Spécifique',
     'Objective' => 'Objectif',
     'On selected plot(s)' => 'Sur les micro parcelles sélectionnées',
@@ -227,6 +230,7 @@ return [
     YiiAnnotationModel::TARGETS_LABEL  => 'Entités ciblées',
     'Back to sensor view' => 'Retour à la vue du capteur',
     'Sensor Data Visualization' => 'Visualisation des données du capteur',
+    'Update event' => 'Modifier l\'événement',
     'Update sensors' => 'Mise à jour des capteurs',
     'Update measured variables' => 'Mise à jour des variables mesurées',
 ];

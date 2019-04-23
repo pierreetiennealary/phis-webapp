@@ -108,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- actuator events -->
     <?= EventGridViewWidget::widget(
             [
-                 EventGridViewWidget::EVENTS => ${app\controllers\ActuatorController::EVENTS_DATA}
+                 EventGridViewWidget::EVENTS_PROVIDER => ${app\controllers\ActuatorController::EVENTS_DATA}
             ]
         ); 
     ?>

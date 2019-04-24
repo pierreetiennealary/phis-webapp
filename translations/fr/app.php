@@ -17,6 +17,7 @@ use app\components\widgets\AnnotationGridViewWidget;
 use app\components\widgets\AnnotationButtonWidget;
 use app\components\widgets\EventButtonWidget;
 use app\components\widgets\EventGridViewWidget;
+use app\components\widgets\PropertyWidget;
 use app\components\widgets\ConcernedItemGridViewWidget;
 use app\models\yiiModels\YiiEventModel;
 use app\models\yiiModels\EventAction;
@@ -174,12 +175,17 @@ return [
     'Model' => 'Modèle',
     'Name' => 'Nom',
     'No' => 'Non',
+    'No item concerned' => 'Aucun élément concerné',
     'No Specific Property' => 'Aucune Propriété Spécifique',
     'Objective' => 'Objectif',
     'On selected plot(s)' => 'Sur les micro parcelles sélectionnées',
     'Ontologies References' => 'Références vers des Ontologies',
     'Organism' => 'Organisme',
     'Owner' => 'Propriétaire',
+    
+    // Property
+    PropertyWidget::NO_PROPERTY_LABEL => 'Aucune propriété spécifique',
+    
     'Password' => 'Mot de passe',
     'Painting' => 'Peinture',
     'Person In Charge' => 'Responsable',

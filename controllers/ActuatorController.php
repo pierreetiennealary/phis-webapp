@@ -288,7 +288,7 @@ class ActuatorController extends Controller {
         
         //4. get events
         $searchEventModel = new EventSearch();
-        $searchEventModel->concernedItemUri = $id;
+        $searchEventModel->searchConcernedItemUri = $id;
         $searchEventModel->pageSize = Yii::$app->params['eventWidgetPageSize'];
         $events = $searchEventModel->search(Yii::$app->session[WSConstants::ACCESS_TOKEN], $searchParams);
      

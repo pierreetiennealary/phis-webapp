@@ -309,7 +309,6 @@ class YiiExperimentModel extends WSActiveRecord {
     public function getExperimentsURIList($sessionToken) {
         $experiments = $this->find($sessionToken, $this->attributesToArray());
         $experimentsToReturn = [];
-        
         if ($experiments !== null) {
             //1. get the URIs
             foreach($experiments as $experiment) {

@@ -2,7 +2,7 @@
 
 return [
     // Global
-    'platform' => 'Demo',
+    'platform' => 'Test',
     'isDemo' => false,
     'demoLogin' => 'guest@opensilex.org',
     'demoPassword' => 'guest',
@@ -16,6 +16,9 @@ return [
     // Index
     'indexPageSize' => 20,
   
+    // DataAnalysis and visualization module activation
+    'dataAnalysisModule' => true,
+    
     // Forms
     'dateTimeFormatDateTimeRangePickerStandard' => 'Y-m-dTH:i:sZ',
     'dateTimeFormatDateTimePickerUserFriendly' => 'yyyy-mm-dd HH:ii:ss',
@@ -64,6 +67,8 @@ return [
     'NationalInfrastructure' => 'http://www.opensilex.org/vocabulary/oeso#NationalInfrastructure',
     'EuropeanInfrastructure' => 'http://www.opensilex.org/vocabulary/oeso#EuropeanInfrastructure',
     'Installation' => 'http://www.opensilex.org/vocabulary/oeso#Installation',
+    
+    'Provenance' => 'http://www.opensilex.org/vocabulary/oeso#Provenance',
     
     // Event
     'event' => 'http://www.opensilex.org/vocabulary/oeev#Event',

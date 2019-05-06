@@ -90,10 +90,10 @@ ToastrAsset::register($this);
                                 'label' => Icon::show('eye-open', [], Icon::BSG) . " " . Yii::t('app', 'Variables'), 
                                 'url' => ['/variable/index']
                             ],
-//                            [
-//                                'label' => Icon::show('wheat', ['class' => 'icofont-lg'], Icon::ICF) . " " . Yii::t('app', 'Species'), 
-//                                'url' => ['/species/index']
-//                            ],
+                            [
+                                'label' => Icon::show('wheat', ['class' => 'icofont-lg'], Icon::ICF) . " " . Yii::t('app', 'Species'), 
+                                'url' => ['/species/index']
+                            ],
                             [
                                 'label' => Icon::show('flag', [], Icon::FA) . " " . Yii::t('app', 'Events'), 
                                 'url' => ['/event/index']
@@ -112,6 +112,10 @@ ToastrAsset::register($this);
                             [
                                 'label' => Icon::show('camera', ['class' => 'fa-large'], Icon::FA) . " " . Yii::t('app', '{n, plural, =1{Sensor} other{Sensors}}', ['n' => 2]), 
                                 'url' => ['/sensor/index']
+                            ],
+                            [
+                                'label' => Icon::show('bullhorn', ['class' => 'fa-large'], Icon::FA) . " " . Yii::t('app', '{n, plural, =1{Actuator} other{Actuators}}', ['n' => 2]), 
+                                'url' => ['/actuator/index']
                             ],
                             [
                                 'label' => Icon::show('blackboard', [], Icon::BSG) . " " . Yii::t('app', '{n, plural, =1{Vector} other{Vectors}}', ['n' => 2]), 
@@ -200,10 +204,10 @@ ToastrAsset::register($this);
                                 'label' => Icon::show('eye-open', [], Icon::BSG) . " " . Yii::t('app', 'Variables'), 
                                 'url' => ['/variable/index']
                             ],
-//                            [
-//                                'label' => Icon::show('wheat', ['class' => 'icofont-lg'], Icon::ICF) . " " . Yii::t('app', 'Species'), 
-//                                'url' => ['/species/index']
-//                            ],
+                            [
+                                'label' => Icon::show('wheat', ['class' => 'icofont-lg'], Icon::ICF) . " " . Yii::t('app', 'Species'), 
+                                'url' => ['/species/index']
+                            ],
                             [
                                 'label' => Icon::show('flag', [], Icon::FA) . " " . Yii::t('app', 'Events'), 
                                 'url' => ['/event/index']
@@ -221,6 +225,10 @@ ToastrAsset::register($this);
                             [
                                 'label' => Icon::show('camera', ['class' => 'fa-large'], Icon::FA) . " " . Yii::t('app', '{n, plural, =1{Sensor} other{Sensors}}', ['n' => 2]), 
                                 'url' => ['/sensor/index']
+                            ],
+                            [
+                                'label' => Icon::show('bullhorn', ['class' => 'fa-large'], Icon::FA) . " " . Yii::t('app', '{n, plural, =1{Actuator} other{Actuators}}', ['n' => 2]), 
+                                'url' => ['/actuator/index']
                             ],
                             [
                                 'label' => Icon::show('blackboard', [], Icon::BSG) . " " . Yii::t('app', '{n, plural, =1{Vector} other{Vectors}}', ['n' => 2]), 

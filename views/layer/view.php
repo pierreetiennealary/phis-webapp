@@ -16,8 +16,9 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\YiiLayerModel */
+/* @var $objectLabel String */
 
-$this->title = $model->objectURI;
+$this->title = $objectLabel;
 
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', '{n, plural, =1{Experiment} other{Experiments}}', ['n' => 2]), 'url' => ['experiment/index']];
 $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['experiment/view', 'id' => $this->title]];
@@ -142,8 +143,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Map Visualization');
                             plot.push("");
                         }
                         if (feature.get('species') !== undefined) {
-                            var species = feature.get('species').split("species/");
-                            plot.push(species[1]);
+                            var species = feature.get('species').split("/");
+                            plot.push(species[species.length - 1]);
                         } else {
                             plot.push("");
                         }

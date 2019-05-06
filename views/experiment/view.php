@@ -10,7 +10,6 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
 use yii\helpers\Url;
-use yii\data\ArrayDataProvider;
 use app\components\widgets\AnnotationButtonWidget;
 use app\components\widgets\AnnotationGridViewWidget;
 use app\components\widgets\EventButtonWidget;
@@ -28,7 +27,7 @@ use app\models\yiiModels\YiiDocumentModel;
  * @var $model app\models\YiiExperimentModel 
  */
 
-$this->title = $model->uri;
+$this->title = $model->alias;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', '{n, plural, =1{Experiment} other{Experiments}}', ['n' => 2]), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -56,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
         
         <?= Html::a(Yii::t('app', 'Map Visualization'), 
-                ['layer/view', 'objectURI' => $model->uri, 'objectType' => 'http://www.opensilex.org/vocabulary/oeso#Experiment', 'depth' => 'true', 'generateFile' => 'false'], ['class' => 'btn btn-info']) ?>
+                ['layer/view', 'objectURI' => $model->uri, 'objectType' => 'http://www.opensilex.org/vocabulary/oeso#Experiment', 'depth' => 'true', 'generateFile' => 'false', 'objectLabel' => $model->alias], ['class' => 'btn btn-info']) ?>
         </p>
 
     <?php
@@ -290,7 +289,7 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <?= EventGridViewWidget::widget(
             [
-                 EventGridViewWidget::EVENTS => ${ExperimentController::EVENTS_DATA}
+                 EventGridViewWidget::EVENTS_PROVIDER => ${ExperimentController::EVENT_PROVIDER}
             ]
         ); 
     ?>
@@ -298,7 +297,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Experiment linked Annotation-->
     <?= AnnotationGridViewWidget::widget(
             [
-                 AnnotationGridViewWidget::ANNOTATIONS => ${ExperimentController::ANNOTATIONS_DATA}
+                 AnnotationGridViewWidget::ANNOTATIONS => ${ExperimentController::ANNOTATION_PROVIDER}
             ]
         ); 
     ?>
@@ -335,7 +334,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
                 'uri',
-                'alias',
+                'label',
                 [
                     'attribute' => 'rdfType',
                     'format' => 'raw',

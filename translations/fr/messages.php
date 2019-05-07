@@ -73,7 +73,7 @@ return [
     'Your session has expired' => 'Votre session a expirée',
     'If you already have an account' => 'Vous possédez déjà un compte',
     'If you want to try PHIS as guest' => 'Vous souhaitez essayer PHIS en tant qu\'invité',
-    'You are on PHIS, the Hybrid Information System about Phenotyping!' => 'Bienvenue dans PHIS, le Système d\'Information Hybride pour le Phénotypage'
+    'You are on PHIS, the Hybrid Information System about Phenotyping!' => 'Bienvenue dans PHIS, le Système d\'Information Hybride pour le Phénotypage',
     'No application available' => 'Aucune application disponible', // controllers/DataAnalysisController.php
     'Demonstration application not avaiblable' => 'Application de démonstration non disponible',  // controllers/DataAnalysisController.php
     'Application not available' => 'Application non disponible',  // views/data-analysis/index.php

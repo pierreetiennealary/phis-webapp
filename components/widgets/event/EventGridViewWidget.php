@@ -6,7 +6,7 @@
 // Creation date: 5 Mar. 2019
 // Contact: andreas.garcia@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
 //******************************************************************************
-namespace app\components\widgets;
+namespace app\components\widgets\event;
 
 use yii\base\Widget;
 use yii\helpers\Html;
@@ -24,7 +24,7 @@ class EventGridViewWidget extends Widget {
 
     const EVENTS_LABEL = "Events";
     const NO_EVENT_LABEL = "No events";
-    const EVENTS_ARE_NOT_SET_LABEL = "Concerned items aren't set";
+    const EVENTS_ARE_NOT_SET_LABEL = "Events aren't set";
     
     const HTML_CLASS = "event-widget";
     

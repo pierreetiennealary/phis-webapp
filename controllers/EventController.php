@@ -41,7 +41,7 @@ class EventController extends GenericController {
     const PARAM_RETURN_URL = "returnUrl";
 
     /**
-     * The return URL after annotation creation
+     * The return URL after annotation creation.
      * @var string 
      */
     public $returnUrl;
@@ -115,8 +115,8 @@ class EventController extends GenericController {
     
     private function hasUnupdatableProperties($eventAction) : bool {
         foreach($eventAction->properties as $property) {
-            if($property !== Yii::$app->params['moveFrom']
-                    || $property !== Yii::$app->params['moveTo']) {
+            if($property->relation !== Yii::$app->params['from']
+                    && $property->relation !== Yii::$app->params['to']) {
                 return true;
             }
         }
@@ -153,7 +153,7 @@ class EventController extends GenericController {
         $model = new InfrastructureSearch();
         $model->page = 0;
         $infrastructuresUrisTypesLabels = [];
-        $infrastructures = $model->search(Yii::$app->session['access_token'], null);
+        $infrastructures = $model->search(Yii::$app->session[WSConstants::ACCESS_TOKEN], null);
         if ($infrastructures === WSConstants::TOKEN_INVALID) {
             return WSConstants::TOKEN_INVALID;
         } else {
@@ -173,20 +173,22 @@ class EventController extends GenericController {
     /**
      * Displays the form to create an event or creates it in case of form submission.
      * @return mixed redirect in case of error or after successfully create 
-     * the event otherwise return the "create" view 
+     * the event otherwise return the "create" view.
      */
     public function actionCreate() {
         $sessionToken = Yii::$app->session[WSConstants::ACCESS_TOKEN];
         $event = new EventCreation();
         $event->isNewRecord = true;
         
-        if (!$event->load(Yii::$app->request->post())) { //display form
+        // Display form
+        if (!$event->load(Yii::$app->request->post())) { 
             $event->load(Yii::$app->request->get(), '');
             $event->creator = $this->getCreatorUri($sessionToken);
             $this->loadFormParams();
             return $this->render('create', ['model' =>  $event]);
-            
-        } else { // submit form         
+           
+        // Submit form    
+        } else {     
             $dataToSend[] = $event->attributesToArray(); 
             $requestResults =  $event->insert($sessionToken, $dataToSend);
             return $this->handlePostPutResponse($requestResults, $event->returnUrl);
@@ -203,10 +205,13 @@ class EventController extends GenericController {
         $event = new EventUpdate();
         $event->isNewRecord = false;
         
+        // Display form
         if (!$event->load(Yii::$app->request->post())) {
             $event = $event->getEvent($sessionToken, $id);
             $this->loadFormParams();
             return $this->render('update', ['model' =>  $event]);
+            
+        // Submit form  
         } else {
             $dataToSend[] = $event->attributesToArray(); 
             $requestResults =  $event->update($sessionToken, $dataToSend);

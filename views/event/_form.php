@@ -2,14 +2,12 @@
 //******************************************************************************
 //                                _form.php
 // SILEX-PHIS
-// Copyright © INRA 2018
+// Copyright © INRA 2019
 // Creation date: 15 Apr. 2019
 // Contact: andreas.garcia@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
 //******************************************************************************
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\data\ArrayDataProvider;
-use yii\grid\GridView;
 use kartik\datetime\DateTimePicker;
 use kartik\select2\Select2;
 use app\models\yiiModels\YiiEventModel;
@@ -18,11 +16,11 @@ use app\models\yiiModels\EventUpdate;
 use app\models\yiiModels\EventAction;
 use app\controllers\EventController;
 use app\components\helpers\Vocabulary;
-use app\components\widgets\ConcernedItemGridViewWidgetWithActions;
+use app\components\widgets\handsontableInput\HandsontableInputWidget;
 ?>
 <div class="event-form well">
     <?php 
-    // generate inputs name root and  inputs id root
+    // Generate inputs name root and  inputs id root
     $eventClassWithNamespace = $model->isNewRecord ? EventCreation::class : EventUpdate::class;
     $eventInputsNameRoot = substr($eventClassWithNamespace, strrpos($eventClassWithNamespace, '\\') + 1);
     $eventInputsIdRoot = strtolower($eventInputsNameRoot);
@@ -117,19 +115,6 @@ use app\components\widgets\ConcernedItemGridViewWidgetWithActions;
         'maxlength' => true
     ]);
     ?>
-    <?= ConcernedItemGridViewWidgetWithActions::widget(
-        [
-            ConcernedItemGridViewWidgetWithActions::DATA_PROVIDER => new ArrayDataProvider([
-                'allModels' => $model->concernedItems,
-                'pagination' => ['pageSize' => 10],
-            ]),
-            ConcernedItemGridViewWidgetWithActions::INPUT_MODEL_CLASS => $eventInputsNameRoot,
-            ConcernedItemGridViewWidgetWithActions::INPUT_MODEL_CONCERNED_ITEMS_URIS_ATTRIBUTE_NAME 
-                => EventAction::CONCERNED_ITEMS_URIS
-        ]
-    ); 
-    ?>
-    
     <?php 
     if ($model->isNewRecord) {
         echo $form->field(
@@ -137,6 +122,39 @@ use app\components\widgets\ConcernedItemGridViewWidgetWithActions;
                 EventCreation::DESCRIPTION)->textarea(['rows' => Yii::$app->params['textAreaRowsNumber']]);
     }
     ?>
+    <?php 
+    $settings = 
+        [
+            'colHeaders' => ['URI'],
+            'data' => $data,
+            'rowHeaders' => true,
+            'contextMenu' => true
+        ];
+    if (sizeof($model->concernedItems) > 0) {
+        foreach($model->concernedItems as $concernedItem) {
+            $data[][0] = $concernedItem->uri;
+        }
+    }
+    else {
+        $data = [[]];
+    }
+    $settings['data'] = $data;
+    
+    if (!(sizeof($model->concernedItems) > 0)) {
+        $settings['columns'] = [
+            [
+                'data' => 'URI',
+                'type' => 'text',
+                'placeholder' => 'http://www.opensilex.org/example/2019/o19000002',
+                'width' => '380px'
+            ]
+        ];
+    }
+    ?>
+    <?= HandsontableInputWidget::widget([
+        'inputName' => $eventInputsNameRoot . "[" . EventCreation::CONCERNED_ITEMS_URIS . "][]",
+        'settings' => $settings
+    ]) ?>
 
     <div class="form-group">
     <?= Html::submitButton(
@@ -163,27 +181,22 @@ use app\components\widgets\ConcernedItemGridViewWidgetWithActions;
             
         var dateOffsetInput = $('input[id*="datetimezoneoffset"]');
             
-        /**
-         * Sets up the form on window's load.
-         */
-        window.onload = function () {
+        hidePropertyBlocs();
             
-            hidePropertyBlocs();
-            
-            setEventTypeSelectOnChangeBehaviour();
-            typeSelect.trigger('change');
-            
-            // Set right property type when the user select new property
-            fromSelect.on('change', function (e) {
-                setPropertyType(fromSelect.val());
-            }); 
-            toSelect.on('change', function (e) {
-                setPropertyType(toSelect.val());
-            }); 
-            if(!dateOffsetInput.val() || dateOffsetInput.val() === "") { // if event creation
-                setDateTimezoneOffsetWithUserDefaultOne();
-            }
-        };
+        setEventTypeSelectOnChangeBehaviour();
+        typeSelect.trigger('change');
+
+        // Set right property type when the user select new property
+        fromSelect.on('change', function (e) {
+            setPropertyType(fromSelect.val());
+        }); 
+        toSelect.on('change', function (e) {
+            setPropertyType(toSelect.val());
+        }); 
+        
+        if(!dateOffsetInput.val() || dateOffsetInput.val() === "") { // if event creation
+            setDateTimezoneOffsetWithUserDefaultOne();
+        }
         
         /**
          * Hides property blocs.
@@ -228,7 +241,7 @@ use app\components\widgets\ConcernedItemGridViewWidgetWithActions;
         }
         
         /**
-         * Sets the user's timezone oofset.
+         * Sets the user's timezone offset.
          */
         function setDateTimezoneOffsetWithUserDefaultOne() {
             // getTimezoneOffset() returns UTC - localTimeZone. 

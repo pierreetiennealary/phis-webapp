@@ -13,6 +13,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use kartik\daterange\DateRangePicker;
 use app\models\yiiModels\EventSearch;
+use app\components\widgets\event\EventButtonWidget;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EventSearch */
@@ -23,7 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="event-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>      
+    
+    <?= EventButtonWidget::widget([EventButtonWidget::CONCERNED_ITEMS_URIS => []]); ?>
    
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

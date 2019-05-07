@@ -66,8 +66,8 @@ class EventButtonWidget extends Widget {
         //\SILEX:conception
         $uriArray = [
                 'event/create',
-                EventPost::CONCERNED_ITEMS_URIS => $this->concernedItemsUris,
-                EventPost::RETURN_URL => Url::current()
+                EventController::PARAM_CONCERNED_ITEMS_URIS => $this->concernedItemsUris,
+                EventController::PARAM_RETURN_URL => Url::current()
             ];
         
         $linkClasses = [];

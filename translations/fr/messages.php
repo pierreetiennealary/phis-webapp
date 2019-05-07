@@ -57,7 +57,7 @@ return [
     'Unknown species' => 'Espèce inconnue',
     'Unknown error' => 'Erreur inconnue',
     'Values in nanometers (450 nm, 560 nm, ...) of the wavelengths at which the radiometric target reflectance has been measured (real numbers)' => 'Valeurs en nanomètres (450 nm, 560 nm, ...) des longueurs d\'onde auxquelles la réflectance de la cible radiométrique a été mesurée (nombres réels)',
-    'Values of the spectral hemispherical reflectances in wavelength of the radiometric target for each of the wavelength listed in the table\'s first row (real numbers included in a range of [0 - 1])' => 'Valeurs des réflectances hémisphériques spectrales de la cible radiométrique pour les longueurs d\'onde de la première ligne du tableau (nombres réels compris entre 0 et 1)',
+    'Values of the spectral hemispherical reflectance in wavelength of the radiometric target for each of the wavelength listed in the first row (real numbers included in a range of [0 - 1])' => 'Valeurs des réflectances hémisphériques spectrales de la cible radiométrique pour les longueurs d\'onde de la première ligne du tableau (nombres réels compris entre 0 et 1)',
     'You <b>cannot modify already existing</b> traits, methods and units.' => 'Vous ne pouvez pas modifier de traits, méthodes et unités déjà existantes.',
     'Please contact us if you think this is a server error. Thank you.' => 'Contactez l\'administrateur si vous pensez que c\'est une erreur.',
     'The above warning occurred while the Web server was processing your request.' => 'Un incident est survenu au moment du traitement de votre requête par le serveur.',

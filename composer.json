@@ -41,7 +41,8 @@
         "nullref/yii2-datatables": "v1.0.4",
         "opensilex/opencpu-client-php": "dev-master",
         "symfony/yaml": "v3.4.0",
-        "himiklab/yii2-handsontable-widget" : "v1.1.1"
+        "himiklab/yii2-handsontable-widget" : "v1.1.1",
+        "phayes/geophp": "^1.2"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "2.0.14",
